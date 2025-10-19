@@ -3,933 +3,463 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Dao Resonance · 太極風格著陸頁</title>
-  <meta name="description" content="A Tai Chi inspired landing page that invites visitors to join the Discord community and follow the Facebook page." />
+  <title>Dao Inspired Interface · 太極風格著陸頁</title>
+  <meta name="description" content="A Tai Chi inspired landing page that spotlights joining the Discord community and following the Facebook page."/>
+  <!-- 品牌图标（仅用于品牌 Logo 图形），可替换为自托管版本 -->
   <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-pbQ8EXAMPLEHASHREPLACEME" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-pbQ8EXAMPLEHASHREPLACEME" crossorigin="anonymous" referrerpolicy="no-referrer"/>
   <style>
-    :root {
-      color-scheme: light;
-      --bg: #f5f0e6;
-      --ink: #f0ebe0;
-      --paper: #1f1c15;
-      --gold: #c3a76d;
-      --white: #ffffff;
-      --black: #0d0d0d;
-      --muted: #5f5644;
-      --surface-border: rgba(142, 116, 70, .28);
-      --ribbon-bg: rgba(249, 245, 236, .82);
-      --ribbon-border: rgba(195, 167, 109, .4);
-      --body-gradient: radial-gradient(1400px 900px at 18% 6%, rgba(195, 167, 109, .18) 0 35%, rgba(255, 255, 255, .6) 60%, var(--bg) 100%);
+    :root{
+      color-scheme:light;
+      --bg:#f5f0e6;               /* 宣紙背景 */
+      --ink:#faf7f0;              /* 纸墨层 */
+      --paper:#1f1c15;            /* 文字顏色 */
+      --gold:#c3a76d;             /* 金色點綴 */
+      --white:#ffffff;
+      --black:#0d0d0d;
+      --muted:#5f5644;            /* 注釋色 */
+      --surface-border:rgba(142,116,70,.28);
+      --ribbon-bg:rgba(249,245,236,.82);
+      --ribbon-border:rgba(195,167,109,.4);
+      --body-gradient:radial-gradient(1400px 900px at 20% 10%, rgba(195,167,109,.15) 0 35%, rgba(255,255,255,.6) 60%, var(--bg) 100%);
     }
 
-    body[data-theme="dark"] {
-      color-scheme: dark;
-      --bg: #070707;
-      --ink: #0f0f10;
-      --paper: #f5f2eb;
-      --muted: #b7b1a6;
-      --surface-border: rgba(195, 167, 109, .2);
-      --ribbon-bg: rgba(15, 15, 15, .76);
-      --ribbon-border: rgba(195, 167, 109, .25);
-      --body-gradient: radial-gradient(1200px 820px at 22% 10%, #181818 0 35%, #0f0f0f 60%, var(--bg) 100%);
+    body[data-theme="dark"]{
+      color-scheme:dark;
+      --bg:#0b0b0b;
+      --ink:#111213;
+      --paper:#f5f2eb;
+      --muted:#b7b1a6;
+      --surface-border:rgba(195,167,109,.2);
+      --ribbon-bg:rgba(15,15,15,.72);
+      --ribbon-border:rgba(195,167,109,.25);
+      --body-gradient:radial-gradient(1200px 800px at 20% 10%, #141414 0 35%, #0f0f0f 60%, var(--bg) 100%);
     }
 
-    html, body { height: 100%; }
-
-    body {
-      margin: 0;
-      color: var(--paper);
-      background: var(--body-gradient);
+    html,body{height:100%;}
+    body{
+      margin:0; color:var(--paper); background:var(--body-gradient);
       font-family: "Noto Serif TC", "Noto Serif SC", "Songti SC", "STSong", "Times New Roman", serif;
-      letter-spacing: .2px;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      transition: background-color .4s ease, color .3s ease;
+      letter-spacing:.2px;
+      -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+      transition:background-color .4s ease, color .3s ease;
     }
 
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: -2;
+    /* 宣纸颗粒与墨晕 */
+    body::before{
+      content:""; position:fixed; inset:0; pointer-events:none; z-index:-1;
       background:
-        radial-gradient(1200px 700px at 70% 20%, rgba(195, 167, 109, .14), transparent 60%),
-        radial-gradient(900px 600px at 30% 80%, rgba(195, 167, 109, .1), transparent 60%),
-        linear-gradient(180deg, rgba(255, 255, 255, .05), rgba(0, 0, 0, .02));
-      mix-blend-mode: soft-light;
-      filter: saturate(.92) contrast(1.03);
+        radial-gradient(1200px 700px at 70% 20%, rgba(195,167,109,.18), transparent 60%),
+        radial-gradient(900px 600px at 30% 80%, rgba(195,167,109,.12), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,.05), rgba(0,0,0,.02));
+      mix-blend-mode:soft-light;
+      filter: saturate(.9) contrast(1.05);
     }
 
-    body::after {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background-image: url('https://grainy-gradients.vercel.app/noise.svg');
-      opacity: .18;
-      mix-blend-mode: soft-light;
-      pointer-events: none;
-      z-index: -1;
+    .container{max-width:1200px; margin:0 auto; padding:24px clamp(16px, 4vw, 48px);}
+
+    .variant{display:none;}
+    body.is-desktop .variant-desktop,
+    body.is-mobile .variant-mobile{display:block;}
+
+    body.is-mobile .container{padding:24px clamp(18px, 6vw, 32px);}
+
+    /* 顶部条：持续提醒加入社群 */
+    .ribbon{
+      position:sticky; top:0; z-index:50;
+      display:flex; gap:10px; align-items:center; justify-content:center;
+      padding:10px 14px; background:var(--ribbon-bg); backdrop-filter: blur(8px);
+      border-bottom:1px solid var(--ribbon-border);
+      font-size:14px; color:var(--paper);
     }
+    .ribbon .dot{width:8px;height:8px;border-radius:50%;background:var(--gold); box-shadow:0 0 0 0 rgba(195,167,109,.7); animation:ping 2s infinite;}
+    @keyframes ping{0%{box-shadow:0 0 0 0 rgba(195,167,109,.7)}70%{box-shadow:0 0 0 12px rgba(195,167,109,0)}100%{box-shadow:0 0 0 0 rgba(195,167,109,0)}}
+    .ribbon strong{color:var(--gold); margin:0 6px;}
 
-    .container {
-      width: min(1200px, calc(100% - clamp(32px, 8vw, 140px)));
-      margin: 0 auto;
+    /* 英雄区 */
+    .hero{display:grid; grid-template-columns:1.2fr .8fr; gap:40px; align-items:center; padding:min(10vh,100px) 0;}
+    @media (max-width:980px){.hero{grid-template-columns:1fr; grid-auto-rows:auto;}}
+
+    .title{
+      font-size: clamp(36px, 5vw, 64px);
+      line-height:1.1; margin:0 0 16px; font-weight:600;
+      text-shadow: 0 12px 40px rgba(195,167,109,.12);
     }
+    .subtitle{color:var(--muted); font-size:clamp(15px, 2vw, 18px); margin:0 0 28px;}
 
-    .ribbon {
-      position: sticky;
-      top: 0;
-      z-index: 40;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      padding: 10px 16px;
-      background: var(--ribbon-bg);
-      border-bottom: 1px solid var(--ribbon-border);
-      font-size: 14px;
-      color: var(--paper);
-      backdrop-filter: blur(10px);
+    .callouts{display:flex; flex-wrap:wrap; gap:16px; align-items:center;}
+    .cta{
+      --btn-bg: rgba(255,255,255,.65);
+      --btn-border: rgba(195,167,109,.35);
+      display:inline-flex; align-items:center; gap:10px; padding:12px 18px;
+      border:1px solid var(--btn-border); border-radius:14px; background:var(--btn-bg);
+      color:var(--paper); text-decoration:none; font-size:16px; font-weight:600;
+      transition: transform .2s ease, box-shadow .3s ease, border-color .2s ease; position:relative; overflow:hidden;
     }
+    .cta.gold{background:linear-gradient(180deg, rgba(195,167,109,.22), rgba(195,167,109,.12)); color:var(--black);}
+    body[data-theme="dark"] .cta{--btn-bg: rgba(23,23,23,.9);}
+    body[data-theme="dark"] .cta.gold{color:var(--paper); background:linear-gradient(180deg, rgba(195,167,109,.18), rgba(195,167,109,.08));}
+    .cta .fa-brands{font-size:20px}
+    .cta:hover{transform:translateY(-2px); box-shadow:0 10px 30px rgba(195,167,109,.24); border-color:rgba(195,167,109,.55)}
+    .cta:focus-visible{outline:2px solid var(--gold); outline-offset:3px}
 
-    .ribbon .dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: var(--gold);
-      box-shadow: 0 0 0 0 rgba(195, 167, 109, .7);
-      animation: pulse 2.8s infinite;
-    }
-
-    @keyframes pulse {
-      0% { box-shadow: 0 0 0 0 rgba(195, 167, 109, .65); }
-      70% { box-shadow: 0 0 0 14px rgba(195, 167, 109, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(195, 167, 109, 0); }
-    }
-
-    .ribbon strong { color: var(--gold); }
-
-    .site-header {
-      padding: clamp(18px, 4vw, 32px) 0;
-    }
-
-    .header-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: clamp(18px, 4vw, 40px);
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .brand-text {
-      display: flex;
-      flex-direction: column;
-      font-size: 20px;
-      line-height: 1.1;
-      letter-spacing: .6px;
-    }
-
-    .brand-text span:last-child {
-      font-size: 13px;
-      color: var(--muted);
-      letter-spacing: .4px;
-    }
-
-    .taiji-crest {
-      position: relative;
-      width: clamp(64px, 7vw, 88px);
-      aspect-ratio: 1/1;
-      border-radius: 50%;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background: radial-gradient(circle at 28% 22%, rgba(255, 255, 255, .45), rgba(255, 255, 255, 0) 58%),
-        radial-gradient(circle at 72% 78%, rgba(0, 0, 0, .45), rgba(0, 0, 0, 0) 60%),
-        conic-gradient(from -90deg, #050505 0deg 180deg, #fefaf2 180deg 360deg);
-      box-shadow: inset 0 0 0 2px rgba(195, 167, 109, .2), 0 18px 46px rgba(0, 0, 0, .28);
-      overflow: hidden;
-    }
-
-    .taiji-crest::before,
-    .taiji-crest::after {
-      content: "";
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 50%;
-      height: 50%;
-      border-radius: 50%;
-      background-repeat: no-repeat;
-    }
-
-    .taiji-crest::before {
-      top: 0;
+    /* 太极图（CSS纯绘+旋转） */
+    .taiji-wrap{display:flex; align-items:center; justify-content:center}
+    .taiji{ width:min(52vw, 360px); height:min(52vw, 360px); border-radius:50%; position:relative;
       background:
-        radial-gradient(circle at 50% 30%, rgba(250, 247, 238, .9) 0 32%, rgba(250, 247, 238, 0) 55%),
-        radial-gradient(circle at 50% 100%, rgba(0, 0, 0, .85) 0 49%, rgba(0, 0, 0, 0) 51%);
-      background-size: 100% 100%, 100% 100%;
-      box-shadow: 0 100% 0 0 #050505;
+        /* 上半黑/下半白的分层 */
+        linear-gradient(#111 0 50%, #fff 0 100%);
+      /* 让整个容器成为圆 */
+      box-shadow: inset 0 0 0 2px rgba(195,167,109,.15), 0 20px 80px rgba(0,0,0,.5);
+      overflow:hidden;
+      animation:spin 48s linear infinite;
+    }
+    /* 两个半圆的“鱼身” */
+    .taiji::before, .taiji::after{
+      content:""; position:absolute; left:50%; transform:translateX(-50%); border-radius:50%; width:50%; height:50%;
+    }
+    .taiji::before{ top:0; background:radial-gradient(circle at 50% 50%, #fff 0 24%, #111 25% 100%);} /* 上半：黑身白眼 */
+    .taiji::after{ bottom:0; background:radial-gradient(circle at 50% 50%, #111 0 24%, #fff 25% 100%);} /* 下半：白身黑眼 */
+
+    @keyframes spin{from{transform:rotate(0)} to{transform:rotate(360deg)}}
+    @media (prefers-reduced-motion:reduce){.taiji{animation:none}}
+
+    /* 分割线（如水波） */
+    .wave{ height:2px; width:100%; margin:56px 0; background:linear-gradient(90deg, transparent, rgba(195,167,109,.6), transparent); filter:blur(.2px)}
+
+    /* 内容区 - 道德经片段（可替换） */
+    .content{display:grid; grid-template-columns:1fr 1fr; gap:28px;}
+    @media (max-width:920px){.content{grid-template-columns:1fr}}
+    .card{ background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.00)); border:1px solid var(--surface-border);
+      border-radius:18px; padding:22px 20px; box-shadow: 0 10px 40px rgba(0,0,0,.35);
+    }
+    .card h3{margin:0 0 10px; font-weight:600; color:var(--gold)}
+    .card p{margin:0; color:var(--paper); opacity:.95; line-height:1.75}
+
+    /* 页脚 */
+    footer{ margin:64px 0 24px; color:var(--muted); font-size:14px; text-align:center}
+
+    /* 移动端固定提醒条（再次强调加入动作） */
+    .cta-sticky{ position:fixed; inset:auto 0 18px 0; display:none; justify-content:center; gap:14px; z-index:60; pointer-events:none;}
+    .cta-sticky a{ pointer-events:auto; box-shadow:0 10px 30px rgba(195,167,109,.25)}
+    body.is-mobile .cta-sticky{display:flex;}
+
+    /* 控制區域 */
+    .topbar{
+      display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:18px;
+      padding-top:32px;
     }
 
-    .taiji-crest::after {
-      bottom: 0;
-      background:
-        radial-gradient(circle at 50% 70%, rgba(16, 16, 16, .9) 0 32%, rgba(16, 16, 16, 0) 55%),
-        radial-gradient(circle at 50% 0%, rgba(252, 249, 241, .9) 0 49%, rgba(252, 249, 241, 0) 51%);
-      background-size: 100% 100%, 100% 100%;
-      box-shadow: 0 -100% 0 0 #fefaf2;
+    .control-panel{
+      display:flex; flex-wrap:wrap; gap:16px;
+      align-items:center;
     }
 
-    .taiji-crest .shine,
-    .taiji-crest .ring,
-    .taiji-crest .mist {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
+    .control{
+      display:flex; flex-direction:column; gap:6px;
+      min-width:160px;
+      font-size:14px;
+      color:var(--muted);
     }
 
-    .taiji-crest .ring {
-      border-radius: 50%;
-      border: 1px solid rgba(195, 167, 109, .55);
-      box-shadow: inset 0 0 12px rgba(195, 167, 109, .4);
-      mix-blend-mode: screen;
+    .control label, .control span{font-weight:600; letter-spacing:.4px; text-transform:uppercase; font-size:12px; color:var(--muted);}
+
+    select,
+    .theme-toggle{
+      font-family:inherit; font-size:14px; border-radius:12px; border:1px solid var(--surface-border);
+      padding:10px 14px; background:rgba(255,255,255,.65); color:var(--paper);
+      transition: border-color .2s ease, box-shadow .2s ease, background .2s ease, color .2s ease;
     }
 
-    .taiji-crest .shine {
-      border-radius: 50%;
-      background: radial-gradient(circle at 28% 22%, rgba(255, 255, 255, .65), rgba(255, 255, 255, 0) 55%);
-      mix-blend-mode: screen;
-      opacity: .85;
+    body[data-theme="dark"] select,
+    body[data-theme="dark"] .theme-toggle{
+      background:rgba(16,16,16,.75);
     }
 
-    .taiji-crest .mist {
-      border-radius: 50%;
-      background: radial-gradient(circle at 70% 80%, rgba(0, 0, 0, .4), rgba(0, 0, 0, 0) 70%);
-      mix-blend-mode: multiply;
-      opacity: .55;
+    select:focus-visible,
+    .theme-toggle:focus-visible{
+      outline:2px solid var(--gold); outline-offset:3px;
     }
 
-    .header-controls {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      flex-wrap: wrap;
-      justify-content: flex-end;
+    .theme-toggle[aria-pressed="true"]{
+      border-color:rgba(195,167,109,.6); box-shadow:0 0 0 3px rgba(195,167,109,.18);
     }
 
-    .language-control {
-      display: grid;
-      gap: 4px;
-      font-size: 13px;
-      color: var(--muted);
+    .theme-toggle{cursor:pointer; display:inline-flex; align-items:center; gap:8px; font-weight:600;}
+
+    .theme-toggle .icon{font-size:16px;}
+
+    @media (max-width:640px){
+      .control{min-width:140px;}
     }
 
-    .language-control select {
-      appearance: none;
-      border: 1px solid var(--surface-border);
-      border-radius: 10px;
-      padding: 6px 28px 6px 12px;
-      font-size: 14px;
-      font-family: inherit;
-      background: var(--ink) url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="12" height="8" viewBox="0 0 12 8" fill="none"%3E%3Cpath d="M1 1.75L6 6.25L11 1.75" stroke="%23c3a76d" stroke-width="1.2" stroke-linecap="round"/%3E%3C/svg%3E') no-repeat right 10px center;
-      color: inherit;
-      cursor: pointer;
-      transition: border-color .2s ease, box-shadow .2s ease;
+    /* 移动端专属布局 */
+    .variant-mobile .mobile-topbar{
+      display:flex; flex-direction:column; gap:20px; padding-top:28px;
     }
 
-    .language-control select:focus {
-      outline: none;
-      border-color: rgba(195, 167, 109, .8);
-      box-shadow: 0 0 0 3px rgba(195, 167, 109, .2);
+    .variant-mobile .mobile-topbar__intro{ text-align:center; }
+
+    .variant-mobile .mobile-controls{
+      display:flex; flex-wrap:wrap; justify-content:center; gap:16px;
     }
 
-    .theme-toggle {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      border: 1px solid var(--surface-border);
-      border-radius: 999px;
-      padding: 6px 14px;
-      background: rgba(255, 255, 255, .35);
-      color: inherit;
-      cursor: pointer;
-      font-size: 14px;
-      font-weight: 600;
-      transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+    .variant-mobile .mobile-control{
+      display:flex; flex-direction:column; gap:6px; min-width:140px;
+      font-size:12px; text-transform:uppercase; letter-spacing:.4px; color:var(--muted);
     }
 
-    body[data-theme="dark"] .theme-toggle { background: rgba(23, 23, 23, .8); }
+    .variant-mobile .mobile-control label{font-weight:600;}
 
-    .theme-toggle:hover { transform: translateY(-1px); box-shadow: 0 12px 30px rgba(195, 167, 109, .22); }
-
-    .hero {
-      padding: clamp(40px, 12vw, 110px) 0;
+    .variant-mobile .mobile-control select{
+      font-family:inherit; font-size:14px; border-radius:12px; border:1px solid var(--surface-border);
+      padding:10px 14px; background:rgba(255,255,255,.7); color:var(--paper);
+      transition:border-color .2s ease, box-shadow .2s ease, background .2s ease, color .2s ease;
     }
 
-    .hero-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr);
-      gap: clamp(32px, 6vw, 90px);
-      align-items: center;
+    body[data-theme="dark"] .variant-mobile .mobile-control select{
+      background:rgba(16,16,16,.75);
     }
 
-    .hero-text {
-      display: grid;
-      gap: clamp(18px, 3vw, 30px);
+    .variant-mobile .mobile-control select:focus-visible{
+      outline:2px solid var(--gold); outline-offset:3px;
     }
 
-    .eyebrow {
-      font-size: 14px;
-      letter-spacing: .6px;
-      text-transform: uppercase;
-      color: var(--gold);
+    .variant-mobile .mobile-control--button{align-items:stretch;}
+
+    .variant-mobile .mobile-control--button .theme-toggle{width:100%; justify-content:center;}
+
+    .variant-mobile .mobile-hero{
+      display:flex; flex-direction:column; align-items:center; gap:24px; text-align:center;
+      padding:48px 0 32px;
     }
 
-    .title {
-      margin: 0;
-      font-size: clamp(40px, 6vw, 68px);
-      line-height: 1.08;
-      font-weight: 600;
-      text-shadow: 0 18px 50px rgba(195, 167, 109, .14);
+    .variant-mobile .mobile-hero__visual{ display:flex; justify-content:center; }
+
+    .variant-mobile .mobile-hero__content{ display:flex; flex-direction:column; gap:18px; align-items:center; }
+
+    .variant-mobile .mobile-callouts{
+      display:flex; flex-direction:column; gap:14px; width:100%;
     }
 
-    .subtitle {
-      margin: 0;
-      font-size: clamp(16px, 2vw, 20px);
-      color: var(--muted);
-      line-height: 1.6;
+    .variant-mobile .mobile-callouts .cta{width:100%; justify-content:center;}
+
+    .variant-mobile .taiji{ width:min(68vw, 280px); height:min(68vw, 280px); }
+
+    .variant-mobile .mobile-insights{
+      display:grid; gap:18px; padding-bottom:36px;
     }
 
-    .callouts {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
-      align-items: center;
-    }
-
-    .cta {
-      --btn-bg: rgba(255, 255, 255, .65);
-      --btn-border: rgba(195, 167, 109, .35);
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      padding: 13px 20px;
-      border: 1px solid var(--btn-border);
-      border-radius: 16px;
-      background: var(--btn-bg);
-      color: var(--paper);
-      text-decoration: none;
-      font-size: 16px;
-      font-weight: 600;
-      transition: transform .2s ease, box-shadow .3s ease, border-color .2s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .cta .fa-brands { font-size: 20px; }
-
-    .cta.gold {
-      background: linear-gradient(180deg, rgba(195, 167, 109, .28), rgba(195, 167, 109, .14));
-      color: var(--black);
-      border-color: rgba(195, 167, 109, .65);
-    }
-
-    body[data-theme="dark"] .cta { --btn-bg: rgba(23, 23, 23, .86); color: var(--paper); }
-    body[data-theme="dark"] .cta.gold { color: var(--paper); background: linear-gradient(180deg, rgba(195, 167, 109, .26), rgba(195, 167, 109, .1)); }
-
-    .cta::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(120deg, rgba(255, 255, 255, .35), rgba(255, 255, 255, 0) 55%);
-      opacity: 0;
-      transition: opacity .25s ease;
-    }
-
-    .cta:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 14px 40px rgba(195, 167, 109, .28);
-      border-color: rgba(195, 167, 109, .6);
-    }
-
-    .cta:hover::after { opacity: 1; }
-
-    .cta:focus-visible {
-      outline: 2px solid var(--gold);
-      outline-offset: 3px;
-    }
-
-    .social-proof {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 18px;
-      align-items: center;
-      color: var(--muted);
-      font-size: 15px;
-    }
-
-    .social-proof .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(195, 167, 109, .25);
-      background: rgba(255, 255, 255, .3);
-      font-size: 14px;
-    }
-
-    body[data-theme="dark"] .social-proof .badge { background: rgba(23, 23, 23, .7); }
-
-    .hero-visual {
-      display: grid;
-      gap: 24px;
-      justify-items: center;
-    }
-
-    .taiji-wrap {
-      position: relative;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: clamp(18px, 4vw, 28px);
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(195, 167, 109, .15), rgba(195, 167, 109, 0) 70%);
-    }
-
-    .taiji {
-      position: relative;
-      width: clamp(240px, 32vw, 360px);
-      aspect-ratio: 1/1;
-      border-radius: 50%;
-      background: radial-gradient(circle at 28% 22%, rgba(255, 255, 255, .45), rgba(255, 255, 255, 0) 58%),
-        radial-gradient(circle at 72% 78%, rgba(0, 0, 0, .45), rgba(0, 0, 0, 0) 60%),
-        conic-gradient(from -90deg, #050505 0deg 180deg, #fefaf2 180deg 360deg);
-      box-shadow: inset 0 0 0 2px rgba(195, 167, 109, .2), 0 28px 80px rgba(0, 0, 0, .35);
-      overflow: hidden;
-      animation: breathe 14s ease-in-out infinite;
-    }
-
-    @keyframes breathe {
-      0%, 100% { transform: rotate(0deg) scale(1); }
-      50% { transform: rotate(180deg) scale(1.02); }
-    }
-
-    .taiji::before,
-    .taiji::after {
-      content: "";
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 50%;
-      height: 50%;
-      border-radius: 50%;
-    }
-
-    .taiji::before {
-      top: 0;
-      background:
-        radial-gradient(circle at 50% 34%, rgba(255, 255, 255, .92) 0 32%, rgba(255, 255, 255, 0) 55%),
-        radial-gradient(circle at 50% 100%, rgba(0, 0, 0, .9) 0 50%, rgba(0, 0, 0, 0) 51%);
-      box-shadow: 0 100% 0 0 #050505;
-    }
-
-    .taiji::after {
-      bottom: 0;
-      background:
-        radial-gradient(circle at 50% 66%, rgba(16, 16, 16, .92) 0 32%, rgba(16, 16, 16, 0) 55%),
-        radial-gradient(circle at 50% 0%, rgba(255, 255, 255, .92) 0 50%, rgba(255, 255, 255, 0) 51%);
-      box-shadow: 0 -100% 0 0 #fefaf2;
-    }
-
-    .taiji .outer-ring,
-    .taiji .shine,
-    .taiji .shadow {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      border-radius: 50%;
-    }
-
-    .taiji .outer-ring {
-      border: 1px solid rgba(195, 167, 109, .45);
-      mix-blend-mode: screen;
-    }
-
-    .taiji .shine {
-      background: radial-gradient(circle at 28% 22%, rgba(255, 255, 255, .55), rgba(255, 255, 255, 0) 55%);
-      mix-blend-mode: screen;
-      opacity: .8;
-    }
-
-    .taiji .shadow {
-      background: radial-gradient(circle at 72% 78%, rgba(0, 0, 0, .45), rgba(0, 0, 0, 0) 70%);
-      mix-blend-mode: multiply;
-      opacity: .6;
-    }
-
-    .taiji-caption {
-      margin: 0;
-      font-size: 14px;
-      color: var(--muted);
-      text-align: center;
-    }
-
-    .social-banner {
-      margin-top: clamp(40px, 8vw, 80px);
-      display: grid;
-      gap: 18px;
-      justify-items: center;
-      text-align: center;
-    }
-
-    .social-banner .label {
-      font-size: 14px;
-      letter-spacing: .5px;
-      text-transform: uppercase;
-      color: var(--gold);
-    }
-
-    .social-icons {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: clamp(20px, 4vw, 48px);
-      padding: 18px 32px;
-      border-radius: 999px;
-      border: 1px solid rgba(195, 167, 109, .28);
-      background: rgba(255, 255, 255, .32);
-      box-shadow: 0 18px 46px rgba(0, 0, 0, .12);
-    }
-
-    body[data-theme="dark"] .social-icons { background: rgba(23, 23, 23, .72); }
-
-    .social-icons .icon {
-      display: grid;
-      place-items: center;
-      width: clamp(48px, 8vw, 66px);
-      height: clamp(48px, 8vw, 66px);
-      border-radius: 50%;
-      background: radial-gradient(circle at 30% 20%, rgba(255, 255, 255, .35), rgba(255, 255, 255, 0) 65%),
-        linear-gradient(180deg, rgba(195, 167, 109, .35), rgba(195, 167, 109, .12));
-      color: var(--black);
-      font-size: clamp(24px, 4vw, 30px);
-      position: relative;
-      border: 1px solid rgba(195, 167, 109, .5);
-    }
-
-    body[data-theme="dark"] .social-icons .icon { color: var(--paper); }
-
-    .principles {
-      margin: clamp(70px, 12vw, 130px) 0;
-      display: grid;
-      gap: clamp(28px, 5vw, 44px);
-    }
-
-    .principles-header {
-      text-align: center;
-      display: grid;
-      gap: 12px;
-      justify-items: center;
-      max-width: 720px;
-      margin: 0 auto;
-    }
-
-    .principles-header h2 {
-      margin: 0;
-      font-size: clamp(30px, 5vw, 48px);
-      font-weight: 600;
-    }
-
-    .principles-header p {
-      margin: 0;
-      font-size: 16px;
-      color: var(--muted);
-      line-height: 1.6;
-    }
-
-    .principle-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: clamp(20px, 4vw, 30px);
-    }
-
-    .principle-card {
-      position: relative;
-      padding: clamp(20px, 4vw, 28px);
-      border-radius: 20px;
-      background: rgba(255, 255, 255, .4);
-      border: 1px solid rgba(195, 167, 109, .25);
-      box-shadow: 0 20px 50px rgba(0, 0, 0, .12);
-      display: grid;
-      gap: 12px;
-      transition: transform .25s ease, box-shadow .25s ease;
-    }
-
-    body[data-theme="dark"] .principle-card { background: rgba(15, 15, 15, .78); }
-
-    .principle-card::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      background: linear-gradient(120deg, rgba(195, 167, 109, .25), transparent 60%);
-      opacity: 0;
-      transition: opacity .3s ease;
-      pointer-events: none;
-    }
-
-    .principle-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 26px 60px rgba(195, 167, 109, .26);
-    }
-
-    .principle-card:hover::after { opacity: 1; }
-
-    .principle-card h3 {
-      margin: 0;
-      font-size: 20px;
-      font-weight: 600;
-    }
-
-    .principle-card p {
-      margin: 0;
-      font-size: 15px;
-      line-height: 1.6;
-      color: var(--muted);
-    }
-
-    .quote-section {
-      padding: clamp(50px, 12vw, 120px) 0;
-    }
-
-    .quote-block {
-      max-width: 760px;
-      margin: 0 auto;
-      text-align: center;
-      background: rgba(255, 255, 255, .35);
-      border-radius: 28px;
-      border: 1px solid rgba(195, 167, 109, .25);
-      padding: clamp(30px, 6vw, 60px);
-      box-shadow: 0 24px 70px rgba(0, 0, 0, .18);
-    }
-
-    body[data-theme="dark"] .quote-block { background: rgba(15, 15, 15, .78); }
-
-    .quote-block p {
-      margin: 0;
-      font-size: clamp(20px, 3vw, 28px);
-      line-height: 1.7;
-    }
-
-    .quote-block .author {
-      display: block;
-      margin-top: 18px;
-      font-size: 14px;
-      color: var(--gold);
-      letter-spacing: .6px;
-    }
-
-    .cta-sticky {
-      position: fixed;
-      left: 50%;
-      bottom: 22px;
-      transform: translateX(-50%);
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 12px 20px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, .9);
-      border: 1px solid rgba(195, 167, 109, .4);
-      box-shadow: 0 14px 40px rgba(0, 0, 0, .24);
-      z-index: 60;
-    }
-
-    .cta-sticky a { font-size: 15px; }
-
-    body[data-theme="dark"] .cta-sticky { background: rgba(18, 18, 18, .92); }
-
-    footer {
-      padding: clamp(30px, 6vw, 60px) 0 70px;
-      border-top: 1px solid rgba(195, 167, 109, .25);
-      text-align: center;
-      color: var(--muted);
-      font-size: 14px;
-      background: rgba(0, 0, 0, 0.02);
-    }
-
-    @media (max-width: 1024px) {
-      .hero-grid { grid-template-columns: 1fr; }
-      .hero-visual { order: -1; }
-      .header-inner { flex-direction: column; align-items: flex-start; }
-    }
-
-    @media (max-width: 720px) {
-      body::after { opacity: .24; }
-      .container { width: min(100%, calc(100% - 32px)); }
-      .header-inner { gap: 24px; }
-      .brand-text { font-size: 18px; }
-      .callouts { flex-direction: column; align-items: flex-start; }
-      .cta { width: 100%; justify-content: center; }
-      .social-proof { justify-content: center; }
-      .cta-sticky { width: calc(100% - 32px); justify-content: center; }
-    }
-
-    @media (max-width: 560px) {
-      .hero { padding: clamp(28px, 14vw, 60px) 0; }
-      .hero-visual { gap: 18px; }
-      .principle-grid { grid-template-columns: 1fr; }
-    }
+    .variant-mobile .mobile-footer{ text-align:center; color:var(--muted); margin:48px 0 12px; font-size:14px; }
   </style>
 </head>
-<body data-theme="light">
-  <div class="ribbon" role="region" aria-label="Community invitation">
+<body data-theme="light" class="is-desktop">
+  <div class="ribbon" role="status" aria-live="polite">
     <span class="dot" aria-hidden="true"></span>
-    <span data-l10n="discordLabel"></span>
-    <strong>·</strong>
-    <span data-l10n="facebookLabel"></span>
+    <span data-l10n="ribbon">Together we honor <strong>Dao Follows Nature</strong> — join our <strong>Discord community</strong> and <strong>follow Facebook</strong> so inspiration never drifts away.</span>
   </div>
 
-  <header class="site-header" id="top">
-    <div class="container header-inner">
-      <a class="brand" href="#top">
-        <span class="taiji-crest" aria-hidden="true">
-          <span class="ring"></span>
-          <span class="shine"></span>
-          <span class="mist"></span>
-        </span>
-        <span class="brand-text">
-          <span data-l10n="brandName"></span>
-          <span data-l10n="brandTagline"></span>
-        </span>
-      </a>
-      <div class="header-controls">
-        <label class="language-control" for="language-select">
-          <span data-l10n="languageLabel"></span>
-          <select id="language-select" data-role="language-select" aria-label="Language selector">
+  <main class="container variant variant-desktop" aria-labelledby="desktop-heading">
+    <header class="topbar">
+      <div>
+        <p class="subtitle" data-l10n="motto">A Tai Chi inspired experience where stillness meets motion.</p>
+      </div>
+      <nav class="control-panel" aria-label="Display preferences">
+        <div class="control">
+          <label for="desktop-language-select" data-l10n="languageLabel">Language</label>
+          <select id="desktop-language-select" data-role="language-select" aria-label="Language selector">
             <option value="en">English</option>
             <option value="zh-Hant">繁體中文</option>
           </select>
-        </label>
-        <button class="theme-toggle" type="button" data-role="theme-toggle" aria-pressed="false">
-          <span class="icon" aria-hidden="true">☀️</span>
-          <span data-l10n="themeToggle"></span>
-        </button>
-      </div>
-    </div>
-  </header>
+        </div>
+        <div class="control">
+          <span data-l10n="themeLabel">Theme</span>
+          <button type="button" class="theme-toggle" data-role="theme-toggle" id="desktop-theme-toggle" aria-pressed="false">
+            <span class="icon" aria-hidden="true">☀️</span>
+            <span data-l10n="themeToggle">Switch to Dark</span>
+          </button>
+        </div>
+      </nav>
+    </header>
 
-  <main>
-    <section class="hero variant variant-desktop" aria-labelledby="hero-title-desktop">
-      <div class="container hero-grid">
-        <div class="hero-text">
-          <span class="eyebrow" data-l10n="eyebrow"></span>
-          <h1 class="title" id="hero-title-desktop" data-l10n="title"></h1>
-          <p class="subtitle" data-l10n="subtitle"></p>
-          <div class="callouts">
-            <a class="cta gold" href="YOUR_DISCORD_LINK" target="_blank" rel="noreferrer noopener">
-              <i class="fa-brands fa-discord" aria-hidden="true"></i>
-              <span data-l10n="discordCta"></span>
-            </a>
-            <a class="cta" href="YOUR_FACEBOOK_LINK" target="_blank" rel="noreferrer noopener">
-              <i class="fa-brands fa-square-facebook" aria-hidden="true"></i>
-              <span data-l10n="facebookCta"></span>
-            </a>
-          </div>
-          <div class="social-proof">
-            <span class="badge">
-              <i class="fa-brands fa-discord" aria-hidden="true"></i>
-              <span data-l10n="discordBadge"></span>
-            </span>
-            <span class="badge">
-              <i class="fa-brands fa-facebook-f" aria-hidden="true"></i>
-              <span data-l10n="facebookBadge"></span>
-            </span>
-          </div>
+    <section class="hero">
+      <div>
+        <h1 id="desktop-heading" class="title" data-l10n="heroTitle">The Dao can be sensed; this interface makes it tangible.</h1>
+        <p class="subtitle" data-l10n="heroSubtitle">Centered on Tai Chi, framed by deliberate whitespace — a stage where community calls to action breathe gracefully.</p>
+        <div class="callouts">
+          <!-- TODO: 替换 href 为你的真实链接 -->
+          <a class="cta gold" href="YOUR_DISCORD_LINK" target="_blank" rel="noopener" aria-label="加入我们的 Discord 社群">
+            <i class="fa-brands fa-discord" aria-hidden="true"></i>
+            <span data-l10n="discordCta">Join the Discord Community</span>
+          </a>
+          <a class="cta" href="YOUR_FACEBOOK_LINK" target="_blank" rel="noopener" aria-label="关注我们的 Facebook 主页">
+            <i class="fa-brands fa-facebook-f" aria-hidden="true"></i>
+            <span data-l10n="facebookCta">Follow the Facebook Page</span>
+          </a>
         </div>
-        <div class="hero-visual">
-          <div class="taiji-wrap">
-            <div class="taiji" role="presentation" aria-hidden="true">
-              <span class="outer-ring"></span>
-              <span class="shine"></span>
-              <span class="shadow"></span>
-            </div>
-          </div>
-          <p class="taiji-caption" data-l10n="taijiCaption"></p>
-        </div>
+      </div>
+      <div class="taiji-wrap" aria-hidden="true">
+        <div class="taiji"></div>
       </div>
     </section>
 
-    <section class="hero variant variant-mobile" aria-labelledby="hero-title-mobile">
-      <div class="container">
-        <div class="hero-visual">
-          <div class="taiji-wrap">
-            <div class="taiji" role="presentation" aria-hidden="true">
-              <span class="outer-ring"></span>
-              <span class="shine"></span>
-              <span class="shadow"></span>
-            </div>
-          </div>
-        </div>
-        <div class="hero-text">
-          <span class="eyebrow" data-l10n="eyebrow"></span>
-          <h1 class="title" id="hero-title-mobile" data-l10n="title"></h1>
-          <p class="subtitle" data-l10n="subtitle"></p>
-          <div class="callouts">
-            <a class="cta gold" href="YOUR_DISCORD_LINK" target="_blank" rel="noreferrer noopener">
-              <i class="fa-brands fa-discord" aria-hidden="true"></i>
-              <span data-l10n="discordCtaShort"></span>
-            </a>
-            <a class="cta" href="YOUR_FACEBOOK_LINK" target="_blank" rel="noreferrer noopener">
-              <i class="fa-brands fa-square-facebook" aria-hidden="true"></i>
-              <span data-l10n="facebookCtaShort"></span>
-            </a>
-          </div>
-        </div>
-      </div>
+    <div class="wave" aria-hidden="true"></div>
+
+    <section class="content" aria-label="道与界面">
+      <article class="card">
+        <h3 data-l10n="card1Title">Interaction · Dao Follows Nature</h3>
+        <p data-l10n="card1Body">Simplicity trims away hesitation. Each decisive path remains clear, each button a guiding trail, each breath of whitespace a compass for mindful journeys.</p>
+      </article>
+      <article class="card">
+        <h3 data-l10n="card2Title">Hierarchy · Effortless Balance</h3>
+        <p data-l10n="card2Body">Let rhythm and contrast lead instead of clutter. Gold accents anchor the gaze, while motions ebb like calm tides—present, purposeful, and poised.</p>
+      </article>
+      <article class="card">
+        <h3 data-l10n="card3Title">Excerpt · Tao Te Ching</h3>
+        <p data-l10n="card3Body">“The Dao that can be spoken is not the constant Dao; the name that can be named is not the constant name. From namelessness, heaven and earth emerge; with names, all things arise.”</p>
+      </article>
+      <article class="card">
+        <h3 data-l10n="card4Title">Modular · Extend with Ease</h3>
+        <p data-l10n="card4Body">Need news, events, curated writings, subscriptions, theme toggles, or multilingual flows? This canvas already carries the DNA for those future constellations.</p>
+      </article>
     </section>
 
-    <section class="container social-banner" aria-labelledby="social-banner-title">
-      <span class="label" id="social-banner-title" data-l10n="socialBannerLabel"></span>
-      <div class="social-icons">
-        <div class="icon" aria-hidden="true"><i class="fa-brands fa-discord"></i></div>
-        <div class="icon" aria-hidden="true"><i class="fa-brands fa-facebook-f"></i></div>
-      </div>
-      <p class="subtitle" data-l10n="socialBannerCopy"></p>
-    </section>
-
-    <section class="container principles" aria-labelledby="principles-title">
-      <div class="principles-header">
-        <h2 id="principles-title" data-l10n="principlesTitle"></h2>
-        <p data-l10n="principlesIntro"></p>
-      </div>
-      <div class="principle-grid">
-        <article class="principle-card">
-          <h3 data-l10n="card1Title"></h3>
-          <p data-l10n="card1Body"></p>
-        </article>
-        <article class="principle-card">
-          <h3 data-l10n="card2Title"></h3>
-          <p data-l10n="card2Body"></p>
-        </article>
-        <article class="principle-card">
-          <h3 data-l10n="card3Title"></h3>
-          <p data-l10n="card3Body"></p>
-        </article>
-        <article class="principle-card">
-          <h3 data-l10n="card4Title"></h3>
-          <p data-l10n="card4Body"></p>
-        </article>
-      </div>
-    </section>
-
-    <section class="quote-section" aria-labelledby="quote-title">
-      <div class="container">
-        <div class="quote-block">
-          <p data-l10n="quote"></p>
-          <span class="author" data-l10n="quoteAuthor"></span>
-        </div>
-      </div>
-    </section>
+    <footer>
+      <p data-l10n="footer">© <span data-role="year"></span> Dao · Tai Chi Interface. Simplicity guides, water flows.</p>
+    </footer>
   </main>
 
-  <aside class="cta-sticky" aria-hidden="true">
-    <a class="cta gold" href="YOUR_DISCORD_LINK" target="_blank" rel="noreferrer noopener">
-      <i class="fa-brands fa-discord" aria-hidden="true"></i>
-      <span data-l10n="discordCtaShort"></span>
-    </a>
-    <a class="cta" href="YOUR_FACEBOOK_LINK" target="_blank" rel="noreferrer noopener">
-      <i class="fa-brands fa-square-facebook" aria-hidden="true"></i>
-      <span data-l10n="facebookCtaShort"></span>
-    </a>
-  </aside>
+  <main class="container variant variant-mobile" aria-labelledby="mobile-heading" aria-hidden="true" hidden>
+    <header class="mobile-topbar">
+      <div class="mobile-topbar__intro">
+        <p class="subtitle" data-l10n="motto">A Tai Chi inspired experience where stillness meets motion.</p>
+      </div>
+      <nav class="mobile-controls" aria-label="Mobile display preferences">
+        <div class="mobile-control">
+          <label for="mobile-language-select" data-l10n="languageLabel">Language</label>
+          <select id="mobile-language-select" data-role="language-select" aria-label="Language selector">
+            <option value="en">English</option>
+            <option value="zh-Hant">繁體中文</option>
+          </select>
+        </div>
+        <div class="mobile-control mobile-control--button">
+          <button type="button" class="theme-toggle" data-role="theme-toggle" id="mobile-theme-toggle" aria-pressed="false">
+            <span class="icon" aria-hidden="true">☀️</span>
+            <span data-l10n="themeToggle">Switch to Dark</span>
+          </button>
+        </div>
+      </nav>
+    </header>
 
-  <footer>
-    <div class="container" data-l10n="footer"></div>
-  </footer>
+    <section class="mobile-hero" aria-labelledby="mobile-heading">
+      <div class="mobile-hero__visual" aria-hidden="true">
+        <div class="taiji"></div>
+      </div>
+      <div class="mobile-hero__content">
+        <h1 id="mobile-heading" class="title" data-l10n="heroTitle">The Dao can be sensed; this interface makes it tangible.</h1>
+        <p class="subtitle" data-l10n="heroSubtitle">Centered on Tai Chi, framed by deliberate whitespace — a stage where community calls to action breathe gracefully.</p>
+        <div class="mobile-callouts">
+          <a class="cta gold" href="YOUR_DISCORD_LINK" target="_blank" rel="noopener" aria-label="加入我们的 Discord 社群">
+            <i class="fa-brands fa-discord" aria-hidden="true"></i>
+            <span data-l10n="discordCta">Join the Discord Community</span>
+          </a>
+          <a class="cta" href="YOUR_FACEBOOK_LINK" target="_blank" rel="noopener" aria-label="关注我们的 Facebook 主页">
+            <i class="fa-brands fa-facebook-f" aria-hidden="true"></i>
+            <span data-l10n="facebookCta">Follow the Facebook Page</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <div class="wave" aria-hidden="true"></div>
+
+    <section class="mobile-insights" aria-label="道与界面的灵感">
+      <article class="card">
+        <h3 data-l10n="card1Title">Interaction · Dao Follows Nature</h3>
+        <p data-l10n="card1Body">Simplicity trims away hesitation. Each decisive path remains clear, each button a guiding trail, each breath of whitespace a compass for mindful journeys.</p>
+      </article>
+      <article class="card">
+        <h3 data-l10n="card2Title">Hierarchy · Effortless Balance</h3>
+        <p data-l10n="card2Body">Let rhythm and contrast lead instead of clutter. Gold accents anchor the gaze, while motions ebb like calm tides—present, purposeful, and poised.</p>
+      </article>
+      <article class="card">
+        <h3 data-l10n="card3Title">Excerpt · Tao Te Ching</h3>
+        <p data-l10n="card3Body">“The Dao that can be spoken is not the constant Dao; the name that can be named is not the constant name. From namelessness, heaven and earth emerge; with names, all things arise.”</p>
+      </article>
+      <article class="card">
+        <h3 data-l10n="card4Title">Modular · Extend with Ease</h3>
+        <p data-l10n="card4Body">Need news, events, curated writings, subscriptions, theme toggles, or multilingual flows? This canvas already carries the DNA for those future constellations.</p>
+      </article>
+    </section>
+
+    <footer class="mobile-footer">
+      <p data-l10n="footer">© <span data-role="year"></span> Dao · Tai Chi Interface. Simplicity guides, water flows.</p>
+    </footer>
+  </main>
+
+  <!-- 移动端固定 CTA，加强转化 -->
+  <div class="cta-sticky" aria-hidden="true">
+    <a class="cta gold" href="YOUR_DISCORD_LINK" target="_blank" rel="noopener">
+      <i class="fa-brands fa-discord"></i>
+      <span data-l10n="discordCtaShort">Join Discord</span>
+    </a>
+    <a class="cta" href="YOUR_FACEBOOK_LINK" target="_blank" rel="noopener">
+      <i class="fa-brands fa-facebook-f"></i>
+      <span data-l10n="facebookCtaShort">Follow Facebook</span>
+    </a>
+  </div>
 
   <script>
     const translations = {
       en: {
-        brandName: 'Dao Resonance',
-        brandTagline: 'Tai Chi Interfaces for Stillness',
+        ribbon: 'Together we honor <strong>Dao Follows Nature</strong> — join our <strong>Discord community</strong> and <strong>follow Facebook</strong> so inspiration never drifts away.',
+        motto: 'A Tai Chi inspired experience where stillness meets motion.',
         languageLabel: 'Language',
+        themeLabel: 'Theme',
         themeToggle: 'Switch to Dark',
-        eyebrow: 'Design in Balance',
-        title: 'Channel the calm rhythm of the Taiji',
-        subtitle: 'Craft meaningful journeys with a canvas that blends meditation, technology, and the living poetry of the Dao. Invite seekers to gather on Discord and extend the conversation on Facebook in a single, flowing gesture.',
-        discordLabel: 'Join our Discord sanctuary',
-        facebookLabel: 'Follow the Facebook chronicle',
-        discordCta: 'Enter the Discord courtyard',
-        facebookCta: 'Follow the Facebook scroll',
+        heroTitle: 'The Dao can be sensed; this interface makes it tangible.',
+        heroSubtitle: 'Centered on Tai Chi, framed by deliberate whitespace — a stage where community calls to action breathe gracefully.',
+        discordCta: 'Join the Discord Community',
+        facebookCta: 'Follow the Facebook Page',
         discordCtaShort: 'Join Discord',
         facebookCtaShort: 'Follow Facebook',
-        discordBadge: 'Live Q&A, rituals & peer reviews',
-        facebookBadge: 'Weekly reflections & event recaps',
-        taijiCaption: 'A living Taiji crest brushed with light and shadow — an emblem of motion within stillness.',
-        socialBannerLabel: 'Community Anchors',
-        socialBannerCopy: 'Both realms mirror each other: Discord nurtures realtime exchange, while Facebook archives the echoes for seekers afar.',
-        principlesTitle: 'Design principles born from the Dao',
-        principlesIntro: 'Anchor your experience in clarity, patience, and the cyclical breath of yin and yang. These pillars guide each digital brushstroke.',
-        card1Title: 'Flow · 無為流程',
-        card1Body: 'Let actions unfold with ease. Each screen gently suggests the next step, allowing intent to surface without pressure.',
-        card2Title: 'Contrast · 虛實共生',
-        card2Body: 'Balance depth with silence. Highlights in gold guide attention, while ample negative space offers respite.',
-        card3Title: 'Community · 同行共修',
-        card3Body: 'Discord circles host live practice and collective inquiry; Facebook keeps the chronicles for thoughtful revisits.',
-        card4Title: 'Evolution · 自在擴展',
-        card4Body: 'Modular components welcome future chapters—events, scriptures, and workshops flourish without disturbing harmony.',
-        quote: '“The Dao is the great mother: empty yet inexhaustible, giving birth to infinite worlds.”',
-        quoteAuthor: '— Tao Te Ching · Chapter 6',
-        footer: '© <span data-role="year"></span> 道 · 太極界面。以簡馭繁，水到渠成。'
+        card1Title: 'Interaction · Dao Follows Nature',
+        card1Body: 'Simplicity trims away hesitation. Each decisive path remains clear, each button a guiding trail, each breath of whitespace a compass for mindful journeys.',
+        card2Title: 'Hierarchy · Effortless Balance',
+        card2Body: 'Let rhythm and contrast lead instead of clutter. Gold accents anchor the gaze, while motions ebb like calm tides—present, purposeful, and poised.',
+        card3Title: 'Excerpt · Tao Te Ching',
+        card3Body: '“The Dao that can be spoken is not the constant Dao; the name that can be named is not the constant name. From namelessness, heaven and earth emerge; with names, all things arise.”',
+        card4Title: 'Modular · Extend with Ease',
+        card4Body: 'Need news, events, curated writings, subscriptions, theme toggles, or multilingual flows? This canvas already carries the DNA for those future constellations.',
+        footer: '© <span data-role="year"></span> Dao · Tai Chi Interface. Simplicity guides, water flows.'
       },
       'zh-Hant': {
-        brandName: '道象回響',
-        brandTagline: '太極界面．靜中生動',
+        ribbon: '與我們一同守護「<strong>道法自然</strong>」—— 立刻 <strong>加入 Discord 社群</strong> 並 <strong>追蹤 Facebook</strong>，靈感不散、同道常在。',
+        motto: '太極靜動相生的體驗，讓留白與流動並行。',
         languageLabel: '語言',
+        themeLabel: '主題',
         themeToggle: '切換為深色',
-        eyebrow: '平衡之設計',
-        title: '引導訪客入太極的呼吸',
-        subtitle: '在靜與動之間鋪陳旅程，結合冥想節奏、科技靈光與《道德經》的詩意。邀請修習者加入 Discord，同步於 Facebook 延伸對話。',
-        discordLabel: '加入 Discord 靜修廊',
-        facebookLabel: '關注 Facebook 風雅誌',
-        discordCta: '步入 Discord 之院',
-        facebookCta: '追蹤 Facebook 長卷',
+        heroTitle: '道，可感；此界面，將之化為可見。',
+        heroSubtitle: '以太極為心、留白為骨；社群號召在呼吸間沉穩展開。',
+        discordCta: '加入 Discord 社群',
+        facebookCta: '追蹤 Facebook 頁面',
         discordCtaShort: '加入 Discord',
         facebookCtaShort: '追蹤 Facebook',
-        discordBadge: '即時共修、問答與回饋',
-        facebookBadge: '每週隨筆與活動紀要',
-        taijiCaption: '太極徽章揉合光影，象徵動中含靜、靜中含動的呼吸節奏。',
-        socialBannerLabel: '社群錨點',
-        socialBannerCopy: '雙平台相互映照：Discord 承載即時對話，Facebook 收藏遠方同道的回聲。',
-        principlesTitle: '以道為師的設計原則',
-        principlesIntro: '以清晰、耐心與陰陽循環為骨幹，為每一道數位筆觸奠定平衡。',
-        card1Title: '流程 · 無為而為',
-        card1Body: '路徑自然而然浮現，畫面輕柔暗示下一步，讓意圖不受逼迫地生長。',
-        card2Title: '對比 · 虛實共鳴',
-        card2Body: '金色光點引導視線，留白提供歇息，深淺層次相互調和。',
-        card3Title: '社群 · 共修同行',
-        card3Body: 'Discord 團聚即時練習與交流；Facebook 保存紀錄，方便靜心回顧。',
-        card4Title: '擴展 · 自在生發',
-        card4Body: '模組化區塊隨時容納新篇章——活動、經典、課程都能自然增長。',
-        quote: '「谷神不死，是謂玄牝。玄牝之門，是謂天地根。」',
-        quoteAuthor: '—— 《道德經》第六章',
+        card1Title: '互動 · 道法自然',
+        card1Body: '去繁就簡，減少抉擇負擔；道路清晰、按鈕即是路徑，留白化作方位，讓使用者心領神會。',
+        card2Title: '層級 · 無為而治',
+        card2Body: '不以堆疊製造焦慮，而以節奏與對比掌握秩序。金色錨點凝視線，動效如潮汐般緩慢而有節。',
+        card3Title: '片段 · 道德經',
+        card3Body: '「道可道，非常道；名可名，非常名。無名天地之始；有名萬物之母。」',
+        card4Title: '模組 · 自在擴展',
+        card4Body: '需要新聞、活動、文集、訂閱、主題切換或多語流程？此畫布已備妥這些延伸的風格基因。',
         footer: '© <span data-role="year"></span> 道 · 太極界面。以簡馭繁，水到渠成。'
       }
     };
 
     const languageSelects = document.querySelectorAll('[data-role="language-select"]');
     const themeToggles = document.querySelectorAll('[data-role="theme-toggle"]');
+
     const variantSections = Array.from(document.querySelectorAll('.variant'));
 
     const detectMobileClient = () => {
@@ -1010,6 +540,7 @@
       });
     });
 
+    // Restore preferences
     const storedLang = localStorage.getItem('preferred-language');
     if (storedLang && translations[storedLang]) {
       currentLanguage = storedLang;
