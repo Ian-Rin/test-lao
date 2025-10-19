@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>道法自然 · 太极风格着陆页</title>
+  <meta name="description" content="以太极、老子、道德经意象为核心的简洁着陆页，突出加入 Discord 社群与 Facebook 主页的行动按钮。"/>
+  <!-- 品牌图标（仅用于品牌 Logo 图形），可替换为自托管版本 -->
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-pbQ8EXAMPLEHASHREPLACEME" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+  <style>
+    :root{
+      --bg:#0b0b0b;               /* 深墨色背景 */
+      --ink:#111213;              /* 纸墨层 */
+      --paper:#f5f2eb;            /* 宣纸色 */
+      --gold:#c3a76d;             /* 金色点缀 */
+      --white:#ffffff;
+      --black:#0d0d0d;
+      --muted:#b7b1a6;            /* 注释色 */
+    }
+
+    html,body{height:100%;}
+    body{
+      margin:0; color:var(--paper); background:radial-gradient(1200px 800px at 20% 10%, #141414 0 35%, #0f0f0f 60%, var(--bg) 100%);
+      font-family: "Noto Serif SC", "Songti SC", "STSong", "Times New Roman", serif;
+      letter-spacing:.2px;
+      -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* 宣纸颗粒与墨晕 */
+    body::before{
+      content:""; position:fixed; inset:0; pointer-events:none; z-index:-1;
+      background:
+        radial-gradient(1200px 700px at 70% 20%, rgba(195,167,109,.12), transparent 60%),
+        radial-gradient(900px 600px at 30% 80%, rgba(195,167,109,.10), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,.03), rgba(0,0,0,.02));
+      mix-blend-mode:soft-light;
+      filter: saturate(.9) contrast(1.05);
+    }
+
+    .container{max-width:1200px; margin:0 auto; padding:24px clamp(16px, 4vw, 48px);}
+
+    /* 顶部条：持续提醒加入社群 */
+    .ribbon{
+      position:sticky; top:0; z-index:50;
+      display:flex; gap:10px; align-items:center; justify-content:center;
+      padding:10px 14px; background:rgba(15,15,15,.72); backdrop-filter: blur(8px);
+      border-bottom:1px solid rgba(195,167,109,.25);
+      font-size:14px; color:var(--paper);
+    }
+    .ribbon .dot{width:8px;height:8px;border-radius:50%;background:var(--gold); box-shadow:0 0 0 0 rgba(195,167,109,.7); animation:ping 2s infinite;}
+    @keyframes ping{0%{box-shadow:0 0 0 0 rgba(195,167,109,.7)}70%{box-shadow:0 0 0 12px rgba(195,167,109,0)}100%{box-shadow:0 0 0 0 rgba(195,167,109,0)}}
+    .ribbon strong{color:var(--gold); margin:0 6px;}
+
+    /* 英雄区 */
+    .hero{display:grid; grid-template-columns:1.2fr .8fr; gap:40px; align-items:center; padding:min(10vh,100px) 0;}
+    @media (max-width:980px){.hero{grid-template-columns:1fr; grid-auto-rows:auto;}}
+
+    .title{
+      font-size: clamp(36px, 5vw, 64px);
+      line-height:1.1; margin:0 0 16px; font-weight:600;
+      text-shadow: 0 12px 40px rgba(195,167,109,.12);
+    }
+    .subtitle{color:var(--muted); font-size:clamp(15px, 2vw, 18px); margin:0 0 28px;}
+
+    .callouts{display:flex; flex-wrap:wrap; gap:16px; align-items:center;}
+    .cta{
+      --btn-bg: rgba(23,23,23,.9);
+      --btn-border: rgba(195,167,109,.35);
+      display:inline-flex; align-items:center; gap:10px; padding:12px 18px;
+      border:1px solid var(--btn-border); border-radius:14px; background:var(--btn-bg);
+      color:var(--paper); text-decoration:none; font-size:16px; font-weight:600;
+      transition: transform .2s ease, box-shadow .3s ease, border-color .2s ease; position:relative; overflow:hidden;
+    }
+    .cta .fa-brands{font-size:20px}
+    .cta:hover{transform:translateY(-2px); box-shadow:0 10px 30px rgba(195,167,109,.18); border-color:rgba(195,167,109,.55)}
+    .cta:focus-visible{outline:2px solid var(--gold); outline-offset:3px}
+    .cta.gold{background:linear-gradient(180deg, rgba(195,167,109,.18), rgba(195,167,109,.08));}
+
+    /* 太极图（CSS纯绘+旋转） */
+    .taiji-wrap{display:flex; align-items:center; justify-content:center}
+    .taiji{ width:min(52vw, 360px); height:min(52vw, 360px); border-radius:50%; position:relative;
+      background:
+        /* 上半黑/下半白的分层 */
+        linear-gradient(#111 0 50%, #fff 0 100%);
+      /* 让整个容器成为圆 */
+      box-shadow: inset 0 0 0 2px rgba(195,167,109,.15), 0 20px 80px rgba(0,0,0,.5);
+      overflow:hidden;
+      animation:spin 48s linear infinite;
+    }
+    /* 两个半圆的“鱼身” */
+    .taiji::before, .taiji::after{
+      content:""; position:absolute; left:50%; transform:translateX(-50%); border-radius:50%; width:50%; height:50%;
+    }
+    .taiji::before{ top:0; background:radial-gradient(circle at 50% 50%, #fff 0 24%, #111 25% 100%);} /* 上半：黑身白眼 */
+    .taiji::after{ bottom:0; background:radial-gradient(circle at 50% 50%, #111 0 24%, #fff 25% 100%);} /* 下半：白身黑眼 */
+
+    @keyframes spin{from{transform:rotate(0)} to{transform:rotate(360deg)}}
+    @media (prefers-reduced-motion:reduce){.taiji{animation:none}}
+
+    /* 分割线（如水波） */
+    .wave{ height:2px; width:100%; margin:56px 0; background:linear-gradient(90deg, transparent, rgba(195,167,109,.6), transparent); filter:blur(.2px)}
+
+    /* 内容区 - 道德经片段（可替换） */
+    .content{display:grid; grid-template-columns:1fr 1fr; gap:28px;}
+    @media (max-width:920px){.content{grid-template-columns:1fr}}
+    .card{ background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.00)); border:1px solid rgba(195,167,109,.20);
+      border-radius:18px; padding:22px 20px; box-shadow: 0 10px 40px rgba(0,0,0,.35);
+    }
+    .card h3{margin:0 0 10px; font-weight:600; color:var(--gold)}
+    .card p{margin:0; color:var(--paper); opacity:.95; line-height:1.75}
+
+    /* 页脚 */
+    footer{ margin:64px 0 24px; color:var(--muted); font-size:14px; text-align:center}
+
+    /* 移动端固定提醒条（再次强调加入动作） */
+    .cta-sticky{ position:fixed; inset:auto 0 18px 0; display:flex; justify-content:center; gap:14px; z-index:60; pointer-events:none;}
+    .cta-sticky a{ pointer-events:auto; box-shadow:0 10px 30px rgba(195,167,109,.25)}
+    @media (min-width:820px){.cta-sticky{display:none}}
+  </style>
+</head>
+<body>
+  <div class="ribbon" role="status" aria-live="polite">
+    <span class="dot" aria-hidden="true"></span>
+    <span>一起以「<strong>道法自然</strong>」为界面底色 —— 立即 <strong>加入 Discord 社群</strong> 与 <strong>关注 Facebook</strong>，不迷路也不掉队。</span>
+  </div>
+
+  <main class="container">
+    <section class="hero">
+      <div>
+        <h1 class="title">道，可道；界面，非常界面。</h1>
+        <p class="subtitle">以太极为心，留白为骨；在极简与秩序中，让内容与社区发生真实的连接。</p>
+        <div class="callouts">
+          <!-- TODO: 替换 href 为你的真实链接 -->
+          <a class="cta gold" href="YOUR_DISCORD_LINK" target="_blank" rel="noopener" aria-label="加入我们的 Discord 社群">
+            <i class="fa-brands fa-discord" aria-hidden="true"></i>
+            <span>加入 Discord 社群</span>
+          </a>
+          <a class="cta" href="YOUR_FACEBOOK_LINK" target="_blank" rel="noopener" aria-label="关注我们的 Facebook 主页">
+            <i class="fa-brands fa-facebook-f" aria-hidden="true"></i>
+            <span>关注 Facebook 主页</span>
+          </a>
+        </div>
+      </div>
+      <div class="taiji-wrap" aria-hidden="true">
+        <div class="taiji"></div>
+      </div>
+    </section>
+
+    <div class="wave" aria-hidden="true"></div>
+
+    <section class="content" aria-label="道与界面">
+      <article class="card">
+        <h3>「道法自然」的交互</h3>
+        <p>去繁就简，减少用户的决策负担；关键动作只保留一到两条路径。按钮即道路，留白即方向。用户来此，不必思考——看见就能出手。</p>
+      </article>
+      <article class="card">
+        <h3>「无为而治」的层级</h3>
+        <p>信息层级不靠堆栈焦虑，而靠对比与节奏：主色与金色点缀形成视觉锚点；动效如呼吸般缓慢，存在但不喧哗。</p>
+      </article>
+      <article class="card">
+        <h3>片段 · 道德经</h3>
+        <p>道可道，非常道；名可名，非常名。无名天地之始；有名万物之母。故常无，欲以观其妙；常有，欲以观其徼。</p>
+      </article>
+      <article class="card">
+        <h3>可定制 · 模块</h3>
+        <p>需要新闻流、活动日历、文集/文摘、订阅邮箱、暗/明主题切换、国际化（中/英/日）？此模板已为这些模块预留空间与风格基因。</p>
+      </article>
+    </section>
+
+    <footer>
+      <p>© <span id="year"></span> 道 · 太极界面。以简驭繁，水到渠成。</p>
+    </footer>
+  </main>
+
+  <!-- 移动端固定 CTA，加强转化 -->
+  <div class="cta-sticky" aria-hidden="false">
+    <a class="cta gold" href="YOUR_DISCORD_LINK" target="_blank" rel="noopener">
+      <i class="fa-brands fa-discord"></i>
+      <span>加入 Discord</span>
+    </a>
+    <a class="cta" href="YOUR_FACEBOOK_LINK" target="_blank" rel="noopener">
+      <i class="fa-brands fa-facebook-f"></i>
+      <span>关注 Facebook</span>
+    </a>
+  </div>
+
+  <script>
+    // 年份自动更新
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
