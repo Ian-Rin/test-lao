@@ -159,7 +159,6 @@
     .control label, .control span{font-weight:600; letter-spacing:.4px; text-transform:uppercase; font-size:12px; color:var(--muted);}
 
     select,
-    .voice-options button,
     .theme-toggle{
       font-family:inherit; font-size:14px; border-radius:12px; border:1px solid var(--surface-border);
       padding:10px 14px; background:rgba(255,255,255,.65); color:var(--paper);
@@ -167,22 +166,15 @@
     }
 
     body[data-theme="dark"] select,
-    body[data-theme="dark"] .voice-options button,
     body[data-theme="dark"] .theme-toggle{
       background:rgba(16,16,16,.75);
     }
 
     select:focus-visible,
-    .voice-options button:focus-visible,
-    .theme-toggle:focus-visible{outline:2px solid var(--gold); outline-offset:3px;}
-
-    .voice-options{display:flex; gap:10px;}
-
-    .voice-options button{
-      cursor:pointer; background:rgba(255,255,255,.65);
+    .theme-toggle:focus-visible{
+      outline:2px solid var(--gold); outline-offset:3px;
     }
 
-    .voice-options button[aria-pressed="true"],
     .theme-toggle[aria-pressed="true"]{
       border-color:rgba(195,167,109,.6); box-shadow:0 0 0 3px rgba(195,167,109,.18);
     }
@@ -193,7 +185,6 @@
 
     @media (max-width:640px){
       .control{min-width:140px;}
-      .voice-options{flex-wrap:wrap;}
     }
   </style>
 </head>
@@ -215,13 +206,6 @@
             <option value="en">English</option>
             <option value="zh-Hant">繁體中文</option>
           </select>
-        </div>
-        <div class="control">
-          <span data-l10n="voiceLabel">Narration Voice</span>
-          <div class="voice-options" role="group" aria-label="Narration voice">
-            <button type="button" class="voice" data-voice="calm" aria-pressed="true">Calm</button>
-            <button type="button" class="voice" data-voice="resonant" aria-pressed="false">Resonant</button>
-          </div>
         </div>
         <div class="control">
           <span data-l10n="themeLabel">Theme</span>
@@ -298,7 +282,6 @@
         ribbon: 'Together we honor <strong>Dao Follows Nature</strong> — join our <strong>Discord community</strong> and <strong>follow Facebook</strong> so inspiration never drifts away.',
         motto: 'A Tai Chi inspired experience where stillness meets motion.',
         languageLabel: 'Language',
-        voiceLabel: 'Narration Voice',
         themeLabel: 'Theme',
         themeToggle: 'Switch to Dark',
         heroTitle: 'The Dao can be sensed; this interface makes it tangible.',
@@ -321,7 +304,6 @@
         ribbon: '與我們一同守護「<strong>道法自然</strong>」—— 立刻 <strong>加入 Discord 社群</strong> 並 <strong>追蹤 Facebook</strong>，靈感不散、同道常在。',
         motto: '太極靜動相生的體驗，讓留白與流動並行。',
         languageLabel: '語言',
-        voiceLabel: '語音風格',
         themeLabel: '主題',
         themeToggle: '切換為深色',
         heroTitle: '道，可感；此界面，將之化為可見。',
@@ -344,7 +326,6 @@
 
     const languageSelect = document.getElementById('language-select');
     const themeToggle = document.getElementById('theme-toggle');
-    const voiceButtons = document.querySelectorAll('.voice-options button');
 
     const applyLanguage = (lang) => {
       const dictionary = translations[lang];
@@ -380,27 +361,10 @@
       setTheme(current === 'dark' ? 'light' : 'dark');
     });
 
-    voiceButtons.forEach((button) => {
-      button.addEventListener('click', () => {
-        voiceButtons.forEach((btn) => btn.setAttribute('aria-pressed', 'false'));
-        button.setAttribute('aria-pressed', 'true');
-        localStorage.setItem('preferred-voice', button.dataset.voice);
-      });
-    });
-
     // Restore preferences
     const storedLang = localStorage.getItem('preferred-language');
     if (storedLang && translations[storedLang]) {
       languageSelect.value = storedLang;
-    }
-
-    const storedVoice = localStorage.getItem('preferred-voice');
-    if (storedVoice) {
-      const activeVoice = document.querySelector(`.voice-options button[data-voice="${storedVoice}"]`);
-      if (activeVoice) {
-        voiceButtons.forEach((btn) => btn.setAttribute('aria-pressed', 'false'));
-        activeVoice.setAttribute('aria-pressed', 'true');
-      }
     }
 
     const storedTheme = localStorage.getItem('preferred-theme');
