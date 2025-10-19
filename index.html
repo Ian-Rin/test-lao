@@ -274,12 +274,14 @@
       font-size:12px; text-transform:uppercase; letter-spacing:.4px; color:var(--muted);
     }
 
-    .variant-mobile .mobile-control label{font-weight:600;}
+    .variant-mobile .mobile-control label,
+    .variant-mobile .mobile-control .mobile-control__label{font-weight:600;}
 
     .variant-mobile .mobile-control select{
       font-family:inherit; font-size:14px; border-radius:12px; border:1px solid var(--surface-border);
       padding:10px 14px; background:rgba(255,255,255,.7); color:var(--paper);
       transition:border-color .2s ease, box-shadow .2s ease, background .2s ease, color .2s ease;
+      width:100%;
     }
 
     body[data-theme="dark"] .variant-mobile .mobile-control select{
@@ -413,6 +415,7 @@
           </select>
         </div>
         <div class="mobile-control mobile-control--button">
+          <span class="mobile-control__label" data-l10n="themeLabel">Theme</span>
           <button type="button" class="theme-toggle" data-role="theme-toggle" id="mobile-theme-toggle" aria-pressed="false">
             <span class="icon" aria-hidden="true">☀️</span>
             <span data-l10n="themeToggle">Switch to Dark</span>
