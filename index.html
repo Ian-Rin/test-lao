@@ -1,39 +1,57 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>道法自然 · 太极风格着陆页</title>
-  <meta name="description" content="以太极、老子、道德经意象为核心的简洁着陆页，突出加入 Discord 社群与 Facebook 主页的行动按钮。"/>
+  <title>Dao Inspired Interface · 太極風格著陸頁</title>
+  <meta name="description" content="A Tai Chi inspired landing page that spotlights joining the Discord community and following the Facebook page."/>
   <!-- 品牌图标（仅用于品牌 Logo 图形），可替换为自托管版本 -->
   <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-pbQ8EXAMPLEHASHREPLACEME" crossorigin="anonymous" referrerpolicy="no-referrer"/>
   <style>
     :root{
-      --bg:#0b0b0b;               /* 深墨色背景 */
-      --ink:#111213;              /* 纸墨层 */
-      --paper:#f5f2eb;            /* 宣纸色 */
-      --gold:#c3a76d;             /* 金色点缀 */
+      color-scheme:light;
+      --bg:#f5f0e6;               /* 宣紙背景 */
+      --ink:#faf7f0;              /* 纸墨层 */
+      --paper:#1f1c15;            /* 文字顏色 */
+      --gold:#c3a76d;             /* 金色點綴 */
       --white:#ffffff;
       --black:#0d0d0d;
-      --muted:#b7b1a6;            /* 注释色 */
+      --muted:#5f5644;            /* 注釋色 */
+      --surface-border:rgba(142,116,70,.28);
+      --ribbon-bg:rgba(249,245,236,.82);
+      --ribbon-border:rgba(195,167,109,.4);
+      --body-gradient:radial-gradient(1400px 900px at 20% 10%, rgba(195,167,109,.15) 0 35%, rgba(255,255,255,.6) 60%, var(--bg) 100%);
+    }
+
+    body[data-theme="dark"]{
+      color-scheme:dark;
+      --bg:#0b0b0b;
+      --ink:#111213;
+      --paper:#f5f2eb;
+      --muted:#b7b1a6;
+      --surface-border:rgba(195,167,109,.2);
+      --ribbon-bg:rgba(15,15,15,.72);
+      --ribbon-border:rgba(195,167,109,.25);
+      --body-gradient:radial-gradient(1200px 800px at 20% 10%, #141414 0 35%, #0f0f0f 60%, var(--bg) 100%);
     }
 
     html,body{height:100%;}
     body{
-      margin:0; color:var(--paper); background:radial-gradient(1200px 800px at 20% 10%, #141414 0 35%, #0f0f0f 60%, var(--bg) 100%);
-      font-family: "Noto Serif SC", "Songti SC", "STSong", "Times New Roman", serif;
+      margin:0; color:var(--paper); background:var(--body-gradient);
+      font-family: "Noto Serif TC", "Noto Serif SC", "Songti SC", "STSong", "Times New Roman", serif;
       letter-spacing:.2px;
       -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+      transition:background-color .4s ease, color .3s ease;
     }
 
     /* 宣纸颗粒与墨晕 */
     body::before{
       content:""; position:fixed; inset:0; pointer-events:none; z-index:-1;
       background:
-        radial-gradient(1200px 700px at 70% 20%, rgba(195,167,109,.12), transparent 60%),
-        radial-gradient(900px 600px at 30% 80%, rgba(195,167,109,.10), transparent 60%),
-        linear-gradient(180deg, rgba(255,255,255,.03), rgba(0,0,0,.02));
+        radial-gradient(1200px 700px at 70% 20%, rgba(195,167,109,.18), transparent 60%),
+        radial-gradient(900px 600px at 30% 80%, rgba(195,167,109,.12), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,.05), rgba(0,0,0,.02));
       mix-blend-mode:soft-light;
       filter: saturate(.9) contrast(1.05);
     }
@@ -44,8 +62,8 @@
     .ribbon{
       position:sticky; top:0; z-index:50;
       display:flex; gap:10px; align-items:center; justify-content:center;
-      padding:10px 14px; background:rgba(15,15,15,.72); backdrop-filter: blur(8px);
-      border-bottom:1px solid rgba(195,167,109,.25);
+      padding:10px 14px; background:var(--ribbon-bg); backdrop-filter: blur(8px);
+      border-bottom:1px solid var(--ribbon-border);
       font-size:14px; color:var(--paper);
     }
     .ribbon .dot{width:8px;height:8px;border-radius:50%;background:var(--gold); box-shadow:0 0 0 0 rgba(195,167,109,.7); animation:ping 2s infinite;}
@@ -65,17 +83,19 @@
 
     .callouts{display:flex; flex-wrap:wrap; gap:16px; align-items:center;}
     .cta{
-      --btn-bg: rgba(23,23,23,.9);
+      --btn-bg: rgba(255,255,255,.65);
       --btn-border: rgba(195,167,109,.35);
       display:inline-flex; align-items:center; gap:10px; padding:12px 18px;
       border:1px solid var(--btn-border); border-radius:14px; background:var(--btn-bg);
       color:var(--paper); text-decoration:none; font-size:16px; font-weight:600;
       transition: transform .2s ease, box-shadow .3s ease, border-color .2s ease; position:relative; overflow:hidden;
     }
+    .cta.gold{background:linear-gradient(180deg, rgba(195,167,109,.22), rgba(195,167,109,.12)); color:var(--black);}
+    body[data-theme="dark"] .cta{--btn-bg: rgba(23,23,23,.9);}
+    body[data-theme="dark"] .cta.gold{color:var(--paper); background:linear-gradient(180deg, rgba(195,167,109,.18), rgba(195,167,109,.08));}
     .cta .fa-brands{font-size:20px}
-    .cta:hover{transform:translateY(-2px); box-shadow:0 10px 30px rgba(195,167,109,.18); border-color:rgba(195,167,109,.55)}
+    .cta:hover{transform:translateY(-2px); box-shadow:0 10px 30px rgba(195,167,109,.24); border-color:rgba(195,167,109,.55)}
     .cta:focus-visible{outline:2px solid var(--gold); outline-offset:3px}
-    .cta.gold{background:linear-gradient(180deg, rgba(195,167,109,.18), rgba(195,167,109,.08));}
 
     /* 太极图（CSS纯绘+旋转） */
     .taiji-wrap{display:flex; align-items:center; justify-content:center}
@@ -104,7 +124,7 @@
     /* 内容区 - 道德经片段（可替换） */
     .content{display:grid; grid-template-columns:1fr 1fr; gap:28px;}
     @media (max-width:920px){.content{grid-template-columns:1fr}}
-    .card{ background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.00)); border:1px solid rgba(195,167,109,.20);
+    .card{ background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.00)); border:1px solid var(--surface-border);
       border-radius:18px; padding:22px 20px; box-shadow: 0 10px 40px rgba(0,0,0,.35);
     }
     .card h3{margin:0 0 10px; font-weight:600; color:var(--gold)}
@@ -117,28 +137,115 @@
     .cta-sticky{ position:fixed; inset:auto 0 18px 0; display:flex; justify-content:center; gap:14px; z-index:60; pointer-events:none;}
     .cta-sticky a{ pointer-events:auto; box-shadow:0 10px 30px rgba(195,167,109,.25)}
     @media (min-width:820px){.cta-sticky{display:none}}
+
+    /* 控制區域 */
+    .topbar{
+      display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:18px;
+      padding-top:32px;
+    }
+
+    .control-panel{
+      display:flex; flex-wrap:wrap; gap:16px;
+      align-items:center;
+    }
+
+    .control{
+      display:flex; flex-direction:column; gap:6px;
+      min-width:160px;
+      font-size:14px;
+      color:var(--muted);
+    }
+
+    .control label, .control span{font-weight:600; letter-spacing:.4px; text-transform:uppercase; font-size:12px; color:var(--muted);}
+
+    select,
+    .voice-options button,
+    .theme-toggle{
+      font-family:inherit; font-size:14px; border-radius:12px; border:1px solid var(--surface-border);
+      padding:10px 14px; background:rgba(255,255,255,.65); color:var(--paper);
+      transition: border-color .2s ease, box-shadow .2s ease, background .2s ease, color .2s ease;
+    }
+
+    body[data-theme="dark"] select,
+    body[data-theme="dark"] .voice-options button,
+    body[data-theme="dark"] .theme-toggle{
+      background:rgba(16,16,16,.75);
+    }
+
+    select:focus-visible,
+    .voice-options button:focus-visible,
+    .theme-toggle:focus-visible{outline:2px solid var(--gold); outline-offset:3px;}
+
+    .voice-options{display:flex; gap:10px;}
+
+    .voice-options button{
+      cursor:pointer; background:rgba(255,255,255,.65);
+    }
+
+    .voice-options button[aria-pressed="true"],
+    .theme-toggle[aria-pressed="true"]{
+      border-color:rgba(195,167,109,.6); box-shadow:0 0 0 3px rgba(195,167,109,.18);
+    }
+
+    .theme-toggle{cursor:pointer; display:inline-flex; align-items:center; gap:8px; font-weight:600;}
+
+    .theme-toggle .icon{font-size:16px;}
+
+    @media (max-width:640px){
+      .control{min-width:140px;}
+      .voice-options{flex-wrap:wrap;}
+    }
   </style>
 </head>
-<body>
+<body data-theme="light">
   <div class="ribbon" role="status" aria-live="polite">
     <span class="dot" aria-hidden="true"></span>
-    <span>一起以「<strong>道法自然</strong>」为界面底色 —— 立即 <strong>加入 Discord 社群</strong> 与 <strong>关注 Facebook</strong>，不迷路也不掉队。</span>
+    <span data-l10n="ribbon">Together we honor <strong>Dao Follows Nature</strong> — join our <strong>Discord community</strong> and <strong>follow Facebook</strong> so inspiration never drifts away.</span>
   </div>
 
   <main class="container">
+    <header class="topbar">
+      <div>
+        <p class="subtitle" data-l10n="motto">A Tai Chi inspired experience where stillness meets motion.</p>
+      </div>
+      <nav class="control-panel" aria-label="Display preferences">
+        <div class="control">
+          <label for="language-select" data-l10n="languageLabel">Language</label>
+          <select id="language-select" aria-label="Language selector">
+            <option value="en">English</option>
+            <option value="zh-Hant">繁體中文</option>
+          </select>
+        </div>
+        <div class="control">
+          <span data-l10n="voiceLabel">Narration Voice</span>
+          <div class="voice-options" role="group" aria-label="Narration voice">
+            <button type="button" class="voice" data-voice="calm" aria-pressed="true">Calm</button>
+            <button type="button" class="voice" data-voice="resonant" aria-pressed="false">Resonant</button>
+          </div>
+        </div>
+        <div class="control">
+          <span data-l10n="themeLabel">Theme</span>
+          <button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="false">
+            <span class="icon" aria-hidden="true">☀️</span>
+            <span data-l10n="themeToggle">Switch to Dark</span>
+          </button>
+        </div>
+      </nav>
+    </header>
+
     <section class="hero">
       <div>
-        <h1 class="title">道，可道；界面，非常界面。</h1>
-        <p class="subtitle">以太极为心，留白为骨；在极简与秩序中，让内容与社区发生真实的连接。</p>
+        <h1 class="title" data-l10n="heroTitle">The Dao can be sensed; this interface makes it tangible.</h1>
+        <p class="subtitle" data-l10n="heroSubtitle">Centered on Tai Chi, framed by deliberate whitespace — a stage where community calls to action breathe gracefully.</p>
         <div class="callouts">
           <!-- TODO: 替换 href 为你的真实链接 -->
           <a class="cta gold" href="YOUR_DISCORD_LINK" target="_blank" rel="noopener" aria-label="加入我们的 Discord 社群">
             <i class="fa-brands fa-discord" aria-hidden="true"></i>
-            <span>加入 Discord 社群</span>
+            <span data-l10n="discordCta">Join the Discord Community</span>
           </a>
           <a class="cta" href="YOUR_FACEBOOK_LINK" target="_blank" rel="noopener" aria-label="关注我们的 Facebook 主页">
             <i class="fa-brands fa-facebook-f" aria-hidden="true"></i>
-            <span>关注 Facebook 主页</span>
+            <span data-l10n="facebookCta">Follow the Facebook Page</span>
           </a>
         </div>
       </div>
@@ -151,25 +258,25 @@
 
     <section class="content" aria-label="道与界面">
       <article class="card">
-        <h3>「道法自然」的交互</h3>
-        <p>去繁就简，减少用户的决策负担；关键动作只保留一到两条路径。按钮即道路，留白即方向。用户来此，不必思考——看见就能出手。</p>
+        <h3 data-l10n="card1Title">Interaction · Dao Follows Nature</h3>
+        <p data-l10n="card1Body">Simplicity trims away hesitation. Each decisive path remains clear, each button a guiding trail, each breath of whitespace a compass for mindful journeys.</p>
       </article>
       <article class="card">
-        <h3>「无为而治」的层级</h3>
-        <p>信息层级不靠堆栈焦虑，而靠对比与节奏：主色与金色点缀形成视觉锚点；动效如呼吸般缓慢，存在但不喧哗。</p>
+        <h3 data-l10n="card2Title">Hierarchy · Effortless Balance</h3>
+        <p data-l10n="card2Body">Let rhythm and contrast lead instead of clutter. Gold accents anchor the gaze, while motions ebb like calm tides—present, purposeful, and poised.</p>
       </article>
       <article class="card">
-        <h3>片段 · 道德经</h3>
-        <p>道可道，非常道；名可名，非常名。无名天地之始；有名万物之母。故常无，欲以观其妙；常有，欲以观其徼。</p>
+        <h3 data-l10n="card3Title">Excerpt · Tao Te Ching</h3>
+        <p data-l10n="card3Body">“The Dao that can be spoken is not the constant Dao; the name that can be named is not the constant name. From namelessness, heaven and earth emerge; with names, all things arise.”</p>
       </article>
       <article class="card">
-        <h3>可定制 · 模块</h3>
-        <p>需要新闻流、活动日历、文集/文摘、订阅邮箱、暗/明主题切换、国际化（中/英/日）？此模板已为这些模块预留空间与风格基因。</p>
+        <h3 data-l10n="card4Title">Modular · Extend with Ease</h3>
+        <p data-l10n="card4Body">Need news, events, curated writings, subscriptions, theme toggles, or multilingual flows? This canvas already carries the DNA for those future constellations.</p>
       </article>
     </section>
 
     <footer>
-      <p>© <span id="year"></span> 道 · 太极界面。以简驭繁，水到渠成。</p>
+      <p data-l10n="footer">© <span id="year"></span> Dao · Tai Chi Interface. Simplicity guides, water flows.</p>
     </footer>
   </main>
 
@@ -177,17 +284,134 @@
   <div class="cta-sticky" aria-hidden="false">
     <a class="cta gold" href="YOUR_DISCORD_LINK" target="_blank" rel="noopener">
       <i class="fa-brands fa-discord"></i>
-      <span>加入 Discord</span>
+      <span data-l10n="discordCtaShort">Join Discord</span>
     </a>
     <a class="cta" href="YOUR_FACEBOOK_LINK" target="_blank" rel="noopener">
       <i class="fa-brands fa-facebook-f"></i>
-      <span>关注 Facebook</span>
+      <span data-l10n="facebookCtaShort">Follow Facebook</span>
     </a>
   </div>
 
   <script>
-    // 年份自动更新
+    const translations = {
+      en: {
+        ribbon: 'Together we honor <strong>Dao Follows Nature</strong> — join our <strong>Discord community</strong> and <strong>follow Facebook</strong> so inspiration never drifts away.',
+        motto: 'A Tai Chi inspired experience where stillness meets motion.',
+        languageLabel: 'Language',
+        voiceLabel: 'Narration Voice',
+        themeLabel: 'Theme',
+        themeToggle: 'Switch to Dark',
+        heroTitle: 'The Dao can be sensed; this interface makes it tangible.',
+        heroSubtitle: 'Centered on Tai Chi, framed by deliberate whitespace — a stage where community calls to action breathe gracefully.',
+        discordCta: 'Join the Discord Community',
+        facebookCta: 'Follow the Facebook Page',
+        discordCtaShort: 'Join Discord',
+        facebookCtaShort: 'Follow Facebook',
+        card1Title: 'Interaction · Dao Follows Nature',
+        card1Body: 'Simplicity trims away hesitation. Each decisive path remains clear, each button a guiding trail, each breath of whitespace a compass for mindful journeys.',
+        card2Title: 'Hierarchy · Effortless Balance',
+        card2Body: 'Let rhythm and contrast lead instead of clutter. Gold accents anchor the gaze, while motions ebb like calm tides—present, purposeful, and poised.',
+        card3Title: 'Excerpt · Tao Te Ching',
+        card3Body: '“The Dao that can be spoken is not the constant Dao; the name that can be named is not the constant name. From namelessness, heaven and earth emerge; with names, all things arise.”',
+        card4Title: 'Modular · Extend with Ease',
+        card4Body: 'Need news, events, curated writings, subscriptions, theme toggles, or multilingual flows? This canvas already carries the DNA for those future constellations.',
+        footer: '© <span id="year"></span> Dao · Tai Chi Interface. Simplicity guides, water flows.'
+      },
+      'zh-Hant': {
+        ribbon: '與我們一同守護「<strong>道法自然</strong>」—— 立刻 <strong>加入 Discord 社群</strong> 並 <strong>追蹤 Facebook</strong>，靈感不散、同道常在。',
+        motto: '太極靜動相生的體驗，讓留白與流動並行。',
+        languageLabel: '語言',
+        voiceLabel: '語音風格',
+        themeLabel: '主題',
+        themeToggle: '切換為深色',
+        heroTitle: '道，可感；此界面，將之化為可見。',
+        heroSubtitle: '以太極為心、留白為骨；社群號召在呼吸間沉穩展開。',
+        discordCta: '加入 Discord 社群',
+        facebookCta: '追蹤 Facebook 頁面',
+        discordCtaShort: '加入 Discord',
+        facebookCtaShort: '追蹤 Facebook',
+        card1Title: '互動 · 道法自然',
+        card1Body: '去繁就簡，減少抉擇負擔；道路清晰、按鈕即是路徑，留白化作方位，讓使用者心領神會。',
+        card2Title: '層級 · 無為而治',
+        card2Body: '不以堆疊製造焦慮，而以節奏與對比掌握秩序。金色錨點凝視線，動效如潮汐般緩慢而有節。',
+        card3Title: '片段 · 道德經',
+        card3Body: '「道可道，非常道；名可名，非常名。無名天地之始；有名萬物之母。」',
+        card4Title: '模組 · 自在擴展',
+        card4Body: '需要新聞、活動、文集、訂閱、主題切換或多語流程？此畫布已備妥這些延伸的風格基因。',
+        footer: '© <span id="year"></span> 道 · 太極界面。以簡馭繁，水到渠成。'
+      }
+    };
+
+    const languageSelect = document.getElementById('language-select');
+    const themeToggle = document.getElementById('theme-toggle');
+    const voiceButtons = document.querySelectorAll('.voice-options button');
+
+    const applyLanguage = (lang) => {
+      const dictionary = translations[lang];
+      if (!dictionary) return;
+      document.documentElement.setAttribute('lang', lang === 'en' ? 'en' : 'zh-Hant');
+      document.querySelectorAll('[data-l10n]').forEach((node) => {
+        const key = node.getAttribute('data-l10n');
+        if (dictionary[key]) {
+          node.innerHTML = dictionary[key];
+        }
+      });
+      localStorage.setItem('preferred-language', lang);
+    };
+
+    const setTheme = (theme) => {
+      document.body.setAttribute('data-theme', theme);
+      const isDark = theme === 'dark';
+      themeToggle.setAttribute('aria-pressed', isDark);
+      themeToggle.querySelector('.icon').textContent = isDark ? '🌙' : '☀️';
+      themeToggle.querySelector('[data-l10n="themeToggle"]').textContent = isDark ?
+        (languageSelect.value === 'zh-Hant' ? '切換為淺色' : 'Switch to Light') :
+        (languageSelect.value === 'zh-Hant' ? '切換為深色' : 'Switch to Dark');
+      localStorage.setItem('preferred-theme', theme);
+    };
+
+    languageSelect.addEventListener('change', (event) => {
+      applyLanguage(event.target.value);
+      setTheme(document.body.getAttribute('data-theme'));
+    });
+
+    themeToggle.addEventListener('click', () => {
+      const current = document.body.getAttribute('data-theme');
+      setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+
+    voiceButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        voiceButtons.forEach((btn) => btn.setAttribute('aria-pressed', 'false'));
+        button.setAttribute('aria-pressed', 'true');
+        localStorage.setItem('preferred-voice', button.dataset.voice);
+      });
+    });
+
+    // Restore preferences
+    const storedLang = localStorage.getItem('preferred-language');
+    if (storedLang && translations[storedLang]) {
+      languageSelect.value = storedLang;
+    }
+
+    const storedVoice = localStorage.getItem('preferred-voice');
+    if (storedVoice) {
+      const activeVoice = document.querySelector(`.voice-options button[data-voice="${storedVoice}"]`);
+      if (activeVoice) {
+        voiceButtons.forEach((btn) => btn.setAttribute('aria-pressed', 'false'));
+        activeVoice.setAttribute('aria-pressed', 'true');
+      }
+    }
+
+    const storedTheme = localStorage.getItem('preferred-theme');
+    if (storedTheme) {
+      setTheme(storedTheme);
+    } else {
+      setTheme('light');
+    }
+
     document.getElementById('year').textContent = new Date().getFullYear();
+    applyLanguage(languageSelect.value);
   </script>
 </body>
 </html>
