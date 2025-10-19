@@ -103,26 +103,35 @@
     .cta:hover{transform:translateY(-2px); box-shadow:0 10px 30px rgba(195,167,109,.24); border-color:rgba(195,167,109,.55)}
     .cta:focus-visible{outline:2px solid var(--gold); outline-offset:3px}
 
-    /* 太极图（CSS纯绘+旋转） */
+    /* 太极图（参照 taichi.html） */
     .taiji-wrap{display:flex; align-items:center; justify-content:center}
-    .taiji{ width:min(52vw, 360px); height:min(52vw, 360px); border-radius:50%; position:relative;
-      background:
-        /* 上半黑/下半白的分层 */
-        linear-gradient(#111 0 50%, #fff 0 100%);
-      /* 让整个容器成为圆 */
-      box-shadow: inset 0 0 0 2px rgba(195,167,109,.15), 0 20px 80px rgba(0,0,0,.5);
+    .taiji{ width:min(52vw, 360px); height:min(52vw, 360px); display:flex; align-items:center; justify-content:center; }
+    .taiji .box{
+      width:100%;
+      height:100%;
+      border-radius:50%;
+      border:2px solid rgba(195,167,109,.3);
+      background:linear-gradient(to right, var(--black) 50%, var(--white) 50%);
+      position:relative;
       overflow:hidden;
-      animation:spin 48s linear infinite;
+      animation:rota 32s linear infinite;
+      box-shadow:0 20px 80px rgba(0,0,0,.45);
     }
-    /* 两个半圆的“鱼身” */
-    .taiji::before, .taiji::after{
-      content:""; position:absolute; left:50%; transform:translateX(-50%); border-radius:50%; width:50%; height:50%;
+    body[data-theme="dark"] .taiji .box{border-color:rgba(195,167,109,.2); box-shadow:0 20px 60px rgba(0,0,0,.65);}
+    .taiji .box:hover{animation-play-state:paused;}
+    .taiji .one,
+    .taiji .two{
+      width:50%;
+      height:50%;
+      border-radius:50%;
+      position:absolute;
+      left:25%;
     }
-    .taiji::before{ top:0; background:radial-gradient(circle at 50% 50%, #fff 0 24%, #111 25% 100%);} /* 上半：黑身白眼 */
-    .taiji::after{ bottom:0; background:radial-gradient(circle at 50% 50%, #111 0 24%, #fff 25% 100%);} /* 下半：白身黑眼 */
+    .taiji .one{ top:0; background:radial-gradient(circle at center, var(--white) 0 24%, var(--black) 25% 100%); }
+    .taiji .two{ bottom:0; background:radial-gradient(circle at center, var(--black) 0 24%, var(--white) 25% 100%); }
 
-    @keyframes spin{from{transform:rotate(0)} to{transform:rotate(360deg)}}
-    @media (prefers-reduced-motion:reduce){.taiji{animation:none}}
+    @keyframes rota{from{transform:rotate(0)} to{transform:rotate(360deg)}}
+    @media (prefers-reduced-motion:reduce){.taiji .box{animation:none}}
 
     /* 分割线（如水波） */
     .wave{ height:2px; width:100%; margin:56px 0; background:linear-gradient(90deg, transparent, rgba(195,167,109,.6), transparent); filter:blur(.2px)}
@@ -299,7 +308,12 @@
         </div>
       </div>
       <div class="taiji-wrap" aria-hidden="true">
-        <div class="taiji"></div>
+        <div class="taiji">
+          <div class="box">
+            <div class="one"></div>
+            <div class="two"></div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -353,7 +367,12 @@
 
     <section class="mobile-hero" aria-labelledby="mobile-heading">
       <div class="mobile-hero__visual" aria-hidden="true">
-        <div class="taiji"></div>
+        <div class="taiji">
+          <div class="box">
+            <div class="one"></div>
+            <div class="two"></div>
+          </div>
+        </div>
       </div>
       <div class="mobile-hero__content">
         <h1 id="mobile-heading" class="title" data-l10n="heroTitle">The Dao can be sensed; this interface makes it tangible.</h1>
