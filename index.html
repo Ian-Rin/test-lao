@@ -78,6 +78,8 @@
 
     /* 英雄区 */
     .hero{
+      position:relative;
+      isolation:isolate;
       display:grid;
       grid-template-columns:minmax(320px, 1fr) minmax(280px, .9fr);
       gap:clamp(32px, 6vw, 96px);
@@ -85,6 +87,8 @@
       padding:clamp(48px, 12vh, 120px) 0;
     }
     .hero > div:first-child{
+      position:relative;
+      z-index:1;
       display:flex;
       flex-direction:column;
       gap:clamp(18px, 3vw, 32px);
@@ -122,70 +126,42 @@
     .cta:hover{transform:translateY(-2px); box-shadow:0 10px 30px rgba(195,167,109,.24); border-color:rgba(195,167,109,.55)}
     .cta:focus-visible{outline:2px solid var(--gold); outline-offset:3px}
 
-    /* 太极图（照搬 taichi.html） */
-    .taiji-wrap{
-      display:flex;
-      justify-content:flex-end;
-      align-items:center;
-      padding-inline:clamp(12px, 3vw, 24px);
-      padding-block:clamp(12px, 4vh, 36px);
+    /* 太极意象：以半阴半阳的光影浮雕隐入背景 */
+    .hero::after{
+      content:"";
+      position:absolute;
+      inset:auto clamp(-12px, 4vw, 24px) 0 0;
+      top:50%;
+      transform:translateY(-50%) rotate(14deg);
+      width:clamp(220px, 32vw, 340px);
+      height:clamp(220px, 32vw, 340px);
+      border-radius:50%;
+      background:
+        radial-gradient(circle at 68% 32%, rgba(255,255,255,.85) 0 16%, transparent 17%),
+        radial-gradient(circle at 32% 68%, rgba(13,13,13,.85) 0 16%, transparent 17%),
+        linear-gradient(90deg, rgba(13,13,13,.92) 0 50%, rgba(255,255,255,.9) 50% 100%);
+      box-shadow:0 22px 60px rgba(0,0,0,.28);
+      mix-blend-mode:multiply;
+      opacity:.18;
+      pointer-events:none;
+      z-index:0;
     }
-    .hero .taiji-wrap{align-self:stretch;}
-    .taiji{
-      width:min(100%, 360px);
-      height:min(100%, 360px);
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      flex:0 0 auto;
+    body[data-theme="dark"] .hero::after{
+      background:
+        radial-gradient(circle at 68% 32%, rgba(250,247,240,.65) 0 16%, transparent 17%),
+        radial-gradient(circle at 32% 68%, rgba(15,15,15,.95) 0 16%, transparent 17%),
+        linear-gradient(90deg, rgba(10,10,10,.95) 0 50%, rgba(240,236,226,.65) 50% 100%);
+      opacity:.26;
+      box-shadow:0 24px 80px rgba(0,0,0,.45);
     }
     @media (max-width:980px){
-      .hero .taiji-wrap{
-        align-self:center;
-        padding:0;
-        justify-content:center;
-      }
-      .hero .taiji{
+      .hero::after{
+        position:absolute;
+        inset:auto auto -16% 50%;
+        transform:translate(-50%, 0) rotate(8deg);
         width:min(68vw, 320px);
         height:min(68vw, 320px);
-      }
-    }
-    .taiji .box{
-      width:300px;
-      height:300px;
-      background-color:#000;
-      border:none;
-      border-radius:50%;
-      background:linear-gradient(to right,black 50%,white 50%);
-      position:relative;
-      animation:rota 5s linear infinite;
-    }
-    .taiji .box:hover{animation-play-state:paused;}
-    .taiji .one{
-      width:150px;
-      height:150px;
-      border-radius:50%;
-      background:-webkit-radial-gradient(center,white 20%,black 20%);
-      position:absolute;
-      top:0;
-      left:75px;
-    }
-    .taiji .two{
-      width:150px;
-      height:150px;
-      border-radius:50%;
-      background:-webkit-radial-gradient(center,black 20%,white 20%);
-      position:absolute;
-      bottom:0;
-      left:75px;
-    }
-
-    @keyframes rota {
-      0%{
-        transform: rotate(0);
-      }
-      100%{
-        transform: rotate(360deg);
+        opacity:.24;
       }
     }
 
@@ -292,21 +268,50 @@
     .variant-mobile .mobile-control--button .theme-toggle{width:100%; justify-content:center;}
 
     .variant-mobile .mobile-hero{
-      display:flex; flex-direction:column; align-items:center; gap:24px; text-align:center;
+      position:relative;
+      isolation:isolate;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:24px;
+      text-align:center;
       padding:48px 0 32px;
+      overflow:hidden;
     }
 
-    .variant-mobile .mobile-hero__visual{ display:flex; justify-content:center; }
+    .variant-mobile .mobile-hero::before{
+      content:"";
+      position:absolute;
+      top:12%;
+      left:50%;
+      transform:translateX(-50%) rotate(6deg);
+      width:min(68vw, 280px);
+      height:min(68vw, 280px);
+      border-radius:50%;
+      background:
+        radial-gradient(circle at 68% 32%, rgba(255,255,255,.75) 0 16%, transparent 17%),
+        radial-gradient(circle at 32% 68%, rgba(13,13,13,.85) 0 16%, transparent 17%),
+        linear-gradient(90deg, rgba(13,13,13,.9) 0 50%, rgba(255,255,255,.82) 50% 100%);
+      opacity:.2;
+      mix-blend-mode:multiply;
+      pointer-events:none;
+      z-index:0;
+    }
+    body[data-theme="dark"] .variant-mobile .mobile-hero::before{
+      background:
+        radial-gradient(circle at 68% 32%, rgba(250,247,240,.6) 0 16%, transparent 17%),
+        radial-gradient(circle at 32% 68%, rgba(13,13,13,.92) 0 16%, transparent 17%),
+        linear-gradient(90deg, rgba(10,10,10,.92) 0 50%, rgba(240,236,226,.62) 50% 100%);
+      opacity:.28;
+    }
 
-    .variant-mobile .mobile-hero__content{ display:flex; flex-direction:column; gap:18px; align-items:center; }
+    .variant-mobile .mobile-hero__content{ position:relative; z-index:1; display:flex; flex-direction:column; gap:18px; align-items:center; }
 
     .variant-mobile .mobile-callouts{
       display:flex; flex-direction:column; gap:14px; width:100%;
     }
 
     .variant-mobile .mobile-callouts .cta{width:100%; justify-content:center;}
-
-    .variant-mobile .taiji{ width:min(68vw, 280px); height:min(68vw, 280px); }
 
     .variant-mobile .mobile-insights{
       display:grid; gap:18px; padding-bottom:36px;
@@ -358,14 +363,6 @@
             <i class="fa-brands fa-facebook-f" aria-hidden="true"></i>
             <span data-l10n="facebookCta">Follow the Facebook Page</span>
           </a>
-        </div>
-      </div>
-      <div class="taiji-wrap" aria-hidden="true">
-        <div class="taiji">
-          <div class="box">
-            <div class="one"></div>
-            <div class="two"></div>
-          </div>
         </div>
       </div>
     </section>
@@ -420,14 +417,6 @@
     </header>
 
     <section class="mobile-hero" aria-labelledby="mobile-heading">
-      <div class="mobile-hero__visual" aria-hidden="true">
-        <div class="taiji">
-          <div class="box">
-            <div class="one"></div>
-            <div class="two"></div>
-          </div>
-        </div>
-      </div>
       <div class="mobile-hero__content">
         <h1 id="mobile-heading" class="title" data-l10n="heroTitle">to be filled</h1>
         <p class="subtitle" data-l10n="heroSubtitle">to be filled</p>
