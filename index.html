@@ -204,11 +204,6 @@
     /* 页脚 */
     footer{ margin:64px 0 24px; color:var(--muted); font-size:14px; text-align:center}
 
-    /* 移动端固定提醒条（再次强调加入动作） */
-    .cta-sticky{ position:fixed; inset:auto 0 18px 0; display:none; justify-content:center; gap:14px; z-index:60; pointer-events:none;}
-    .cta-sticky a{ pointer-events:auto; box-shadow:0 10px 30px rgba(195,167,109,.25)}
-    body.is-mobile .cta-sticky{display:flex;}
-
     /* 控制區域 */
     .topbar{
       display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:18px;
@@ -475,18 +470,6 @@
     </footer>
   </main>
 
-  <!-- 移动端固定 CTA，加强转化 -->
-  <div class="cta-sticky" aria-hidden="true">
-    <a class="cta gold" href="YOUR_DISCORD_LINK" target="_blank" rel="noopener">
-      <i class="fa-brands fa-discord"></i>
-      <span data-l10n="discordCtaShort">Join Discord</span>
-    </a>
-    <a class="cta" href="YOUR_FACEBOOK_LINK" target="_blank" rel="noopener">
-      <i class="fa-brands fa-facebook-f"></i>
-      <span data-l10n="facebookCtaShort">Follow Facebook</span>
-    </a>
-  </div>
-
   <script>
     const translations = {
       en: {
@@ -499,8 +482,6 @@
         heroSubtitle: 'to be filled',
         discordCta: 'Join the Discord Community',
         facebookCta: 'Follow the Facebook Page',
-        discordCtaShort: 'Join Discord',
-        facebookCtaShort: 'Follow Facebook',
         card1Title: 'to be filled',
         card1Body: 'to be filled',
         card2Title: 'to be filled',
@@ -521,8 +502,6 @@
         heroSubtitle: 'to be filled',
         discordCta: '加入 Discord 社群',
         facebookCta: '追蹤 Facebook 頁面',
-        discordCtaShort: '加入 Discord',
-        facebookCtaShort: '追蹤 Facebook',
         card1Title: 'to be filled',
         card1Body: 'to be filled',
         card2Title: 'to be filled',
@@ -554,7 +533,6 @@
         section.hidden = !shouldShow;
         section.setAttribute('aria-hidden', shouldShow ? 'false' : 'true');
       });
-      document.querySelector('.cta-sticky')?.setAttribute('aria-hidden', isMobile ? 'false' : 'true');
     };
 
     let currentLanguage = 'en';
